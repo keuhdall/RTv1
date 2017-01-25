@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 17:53:29 by lmarques          #+#    #+#             */
-/*   Updated: 2017/01/25 00:15:04 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/01/25 15:58:38 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,6 @@ int		ft_check_all(t_env *env)
 	while (++count < 6)
 	{
 		if (env->camera_filled[count] == 0)
-			return (0);
-	}
-	count = -1;
-	while (++count < 7)
-	{
-		if (env->object_filled[count] == 0)
 			return (0);
 	}
 	return (1);
