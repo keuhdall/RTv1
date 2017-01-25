@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 17:53:47 by lmarques          #+#    #+#             */
-/*   Updated: 2017/01/24 23:00:38 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/01/25 01:21:29 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void		ft_fill_objects(t_env *env, char *ln, int *e)
 	count = 0;
 	tmp = ft_strsplit(ln, '=');
 	ft_check_split(tmp);
+	ft_fill_object_type(env, tmp, &obj);
 	ft_fill_object_position(env, tmp, &obj);
 	ft_fill_object_rotation(env, tmp, &obj);
 	if (!ft_strcmp(tmp[0], "color"))
@@ -86,6 +87,12 @@ void		ft_fill_objects(t_env *env, char *ln, int *e)
 		ft_reset_object(env);
 		free(obj_tmp);
 	}
+	while (tmp[count])
+	{
+		free(tmp[count]);
+		count++;
+	}
+	free(tmp);
 }
 
 void		ft_fill_camera(t_env *env, char *ln, int *e)
@@ -93,6 +100,7 @@ void		ft_fill_camera(t_env *env, char *ln, int *e)
 	int		count;
 	char	**tmp;
 
+	count = 0;
 	tmp = ft_strsplit(ln, '=');
 	ft_check_split(tmp);
 	ft_fill_camera_position(env, tmp);
