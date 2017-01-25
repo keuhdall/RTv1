@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 01:54:38 by lmarques          #+#    #+#             */
-/*   Updated: 2017/01/25 01:24:54 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/01/25 19:53:45 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ void	ft_get_entity(t_env *env, char *ln, int *e)
 {
 	if (!ft_strcmp(ln, "[scene]"))
 		env->entity_type = SCENE;
-	else if (!ft_strcmp(ln, "[objects]"))
-		env->entity_type = OBJECTS;
 	else if (!ft_strcmp(ln, "[camera]"))
 		env->entity_type = CAMERA;
+	else if (!ft_strcmp(ln, "[objects]"))
+		env->entity_type = OBJECTS;
 	else
 		*e = 1;
 }
