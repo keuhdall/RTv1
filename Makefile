@@ -25,7 +25,7 @@ OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME):
+$(NAME): $(OBJ)
 		make -C libft
 		make -C minilibx
 		mv libft/libft.a .
