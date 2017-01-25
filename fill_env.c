@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 17:53:47 by lmarques          #+#    #+#             */
-/*   Updated: 2017/01/25 19:53:02 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/01/25 23:08:30 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ void		ft_fill_objects(t_env *env, char *ln, int *e)
 		obj_tmp = ft_new_obj(obj);
 		ft_push_obj(&env->obj_lst, obj_tmp);
 		ft_reset_object(env);
-		free(obj_tmp);
 	}
 	while (tmp[count])
 	{

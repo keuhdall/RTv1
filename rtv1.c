@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 01:48:29 by lmarques          #+#    #+#             */
-/*   Updated: 2017/01/25 20:49:09 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/01/25 23:06:12 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	main(int argc, char *argv[])
 	t_obj_lst	*tmp;
 
 	err = 0;
+	env.obj_lst = NULL;
 	ft_init_tabs(&env);
-	tmp = env.obj_lst;
 	if (argc != 2)
 	{
 		ft_putendl("error");
@@ -34,6 +34,7 @@ int	main(int argc, char *argv[])
 		printf("scene name : %s\n", env.scene.name);
 		printf("scene size.x : %d\n", env.scene.size.x);
 		printf("scene size.y : %d\n", env.scene.size.y);
+		tmp = env.obj_lst;
 		while (tmp)
 		{
 			printf("color = %d\n", tmp->obj.color);
