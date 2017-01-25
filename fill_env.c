@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 17:53:47 by lmarques          #+#    #+#             */
-/*   Updated: 2017/01/25 01:21:29 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/01/25 11:33:40 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,22 +63,26 @@ void		ft_fill_scene(t_env *env, char *ln, int *e)
 void		ft_fill_objects(t_env *env, char *ln, int *e)
 {
 	int				count;
+	char			found;
 	char			**tmp;
 	static t_object	obj;
 	t_obj_lst		*obj_tmp;
 
 	count = 0;
+	found = 0;
 	tmp = ft_strsplit(ln, '=');
 	ft_check_split(tmp);
-	ft_fill_object_type(env, tmp, &obj);
-	ft_fill_object_position(env, tmp, &obj);
-	ft_fill_object_rotation(env, tmp, &obj);
+	ft_fill_object_type(env, tmp, &obj, &found);
+	if (!found)
+		ft_fill_object_position(env, tmp, &obj, &found);
+	if (!found)
+		ft_fill_object_rotation(env, tmp, &obj, &found);
 	if (!ft_strcmp(tmp[0], "color"))
 	{
 		env->object_filled[6] = 1;
 		obj.color = ft_atoi(tmp[1]);
 	}
-	else
+	else if (!found)
 		*e = 1;
 	if (ft_check_object(env))
 	{
@@ -98,13 +102,16 @@ void		ft_fill_objects(t_env *env, char *ln, int *e)
 void		ft_fill_camera(t_env *env, char *ln, int *e)
 {
 	int		count;
+	char	found;
 	char	**tmp;
 
+	found = 0;
 	count = 0;
 	tmp = ft_strsplit(ln, '=');
 	ft_check_split(tmp);
-	ft_fill_camera_position(env, tmp);
-	ft_fill_camera_rotation(env, tmp, e);
+	ft_fill_camera_position(env, tmp, &found);
+	if (!found)
+		ft_fill_camera_rotation(env, tmp, e);
 	while (tmp[count])
 	{
 		free(tmp[count]);
