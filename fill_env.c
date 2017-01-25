@@ -6,11 +6,12 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 17:53:47 by lmarques          #+#    #+#             */
-/*   Updated: 2017/01/25 11:33:40 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/01/25 19:53:02 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+#include <stdio.h>
 
 t_obj_lst	*ft_new_obj(t_object obj)
 {
@@ -49,7 +50,7 @@ void		ft_fill_scene(t_env *env, char *ln, int *e)
 	tmp = ft_strsplit(ln, '=');
 	ft_check_split(tmp);
 	if (!ft_strcmp(tmp[0], "name"))
-		env->scene.name = tmp[1];
+		env->scene.name = ft_strdup(tmp[1]);
 	else
 		ft_fill_scene_size(env, tmp, e);
 	while (tmp[count])
