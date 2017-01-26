@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/06 23:35:12 by lmarques          #+#    #+#             */
-/*   Updated: 2016/11/30 15:37:15 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/01/26 15:26:18 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+double				ft_atof(const char *str);
 int					ft_atoi(const char *str);
 void				ft_bzero(void *s, size_t n);
 char				*ft_epur_str(char *str);

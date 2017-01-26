@@ -1,6 +1,7 @@
 NAME = libft.a
 
-SRC = ft_atoi.c \
+SRC = ft_atof.c \
+	  ft_atoi.c \
 	  ft_bzero.c \
 	  ft_epur_str.c \
 	  ft_isalnum.c \
@@ -26,6 +27,7 @@ SRC = ft_atoi.c \
 	  ft_memdel.c \
 	  ft_memmove.c \
 	  ft_memset.c \
+	  ft_pow.c \
 	  ft_putchar.c \
 	  ft_putchar_fd.c \
 	  ft_putendl.c \
@@ -69,7 +71,7 @@ OBJECTS = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME):
+$(NAME): $(OBJECTS)
 		gcc -Wall -Werror -Wextra -c $(SRC)
 		ar rc $(NAME) $(OBJECTS)
 
