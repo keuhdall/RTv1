@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 01:54:38 by lmarques          #+#    #+#             */
-/*   Updated: 2017/01/25 19:53:45 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/01/26 20:04:38 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ void	ft_read_file(char *name, t_env *env, int *e)
 	fd = open(name, O_RDONLY);
 	while ((ret = get_next_line(fd, &ln)))
 	{
-		ft_parse_line(env, ln, e);
+		if (ft_strcmp(ln, ""))
+			ft_parse_line(env, ln, e);
 		free(ln);
 	}
 	free(ln);
