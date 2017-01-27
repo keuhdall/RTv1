@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 17:53:47 by lmarques          #+#    #+#             */
-/*   Updated: 2017/01/25 23:08:30 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/01/27 14:02:36 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_obj_lst	*ft_new_obj(t_object obj)
 	tmp->obj.position = obj.position;
 	tmp->obj.rotation = obj.rotation;
 	tmp->obj.color = obj.color;
+	tmp->next = NULL;
 	return (tmp);
 }
 
@@ -80,7 +81,7 @@ void		ft_fill_objects(t_env *env, char *ln, int *e)
 		ft_fill_object_rotation(env, tmp, &obj, &found);
 	if (!ft_strcmp(tmp[0], "color"))
 	{
-		env->object_filled[6] = 1;
+		env->object_filled[0] = 1;
 		obj.color = ft_atoi(tmp[1]);
 	}
 	else if (!found)
