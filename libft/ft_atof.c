@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 14:54:21 by lmarques          #+#    #+#             */
-/*   Updated: 2017/01/26 20:11:45 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/01/27 18:29:42 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,21 @@ double		ft_atof(const char *str)
 	double	tmp2;
 	char	**tab;
 
-	count = 0;
+	count = -1;
 	tab = ft_strsplit(str, '.');
-	if (ft_count_str(tab) != 2)
-		return (0);
+	if (ft_count_str(tab) < 2)
+	{
+		tmp2 = (double)ft_atoi(tab[0]);
+		while (tab[++count])
+			free(tab[count]);
+		free(tab);
+		return (tmp2);
+	}
 	tmp1 = ft_atoi(tab[0]);
 	tmp2 = (double)((double)ft_atoi(tab[1]) / ft_pow(10, ft_count_nb(tab[1])));
 	tmp2 += (double)tmp1;
-	while (tab[count])
-	{
+	while (tab[++count])
 		free(tab[count]);
-		count++;
-	}
 	free(tab);
 	return (tmp2);
 }
