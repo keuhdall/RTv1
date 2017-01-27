@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 01:48:29 by lmarques          #+#    #+#             */
-/*   Updated: 2017/01/26 19:13:22 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/01/27 13:58:17 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	main(int argc, char *argv[])
 			printf("\n");
 			printf("object rotation.x : %f\n", tmp->obj.rotation.x);
 			printf("object rotation.y : %f\n", tmp->obj.rotation.y);
-			printf("object rotation.z : %f\n", tmp->obj.position.z);
+			printf("object rotation.z : %f\n", tmp->obj.rotation.z);
 			printf("color = %d\n", tmp->obj.color);
 			printf("====================\n");
 			printf("\n");
