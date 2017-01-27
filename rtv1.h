@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 01:19:41 by lmarques          #+#    #+#             */
-/*   Updated: 2017/01/25 11:29:24 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/01/27 14:03:52 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define RTV1_H
 
 # include <math.h>
-# include "./minilibx/mlx.h"
+//# include "./minilibx/mlx.h"
 # include "./libft/libft.h"
 # include "./libft/get_next_line.h"
 
@@ -112,7 +112,7 @@ typedef struct			s_env
 	t_obj_lst			*obj_lst;
 	char			scene_filled[2];
 	char			camera_filled[6];
-	char			object_filled[7];
+	char			object_filled[8];
 }						t_env;
 
 void					ft_init_tabs(t_env *env);
