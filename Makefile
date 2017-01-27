@@ -18,7 +18,8 @@ SRC = rtv1.c \
 		checker.c \
 		scene.c \
 		camera.c \
-		object.c
+		object.c \
+		tools.c
 
 
 OBJ = $(SRC:.c=.o)

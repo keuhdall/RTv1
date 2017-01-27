@@ -6,12 +6,11 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 17:53:47 by lmarques          #+#    #+#             */
-/*   Updated: 2017/01/27 14:02:36 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/01/27 18:19:12 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-#include <stdio.h>
 
 t_obj_lst	*ft_new_obj(t_object obj)
 {
@@ -54,12 +53,7 @@ void		ft_fill_scene(t_env *env, char *ln, int *e)
 		env->scene.name = ft_strdup(tmp[1]);
 	else
 		ft_fill_scene_size(env, tmp, e);
-	while (tmp[count])
-	{
-		free(tmp[count]);
-		count++;
-	}
-	free(tmp);
+	ft_free_split(tmp);
 }
 
 void		ft_fill_objects(t_env *env, char *ln, int *e)
@@ -92,12 +86,7 @@ void		ft_fill_objects(t_env *env, char *ln, int *e)
 		ft_push_obj(&env->obj_lst, obj_tmp);
 		ft_reset_object(env);
 	}
-	while (tmp[count])
-	{
-		free(tmp[count]);
-		count++;
-	}
-	free(tmp);
+	ft_free_split(tmp);
 }
 
 void		ft_fill_camera(t_env *env, char *ln, int *e)
@@ -113,10 +102,5 @@ void		ft_fill_camera(t_env *env, char *ln, int *e)
 	ft_fill_camera_position(env, tmp, &found);
 	if (!found)
 		ft_fill_camera_rotation(env, tmp, e);
-	while (tmp[count])
-	{
-		free(tmp[count]);
-		count++;
-	}
-	free(tmp);
+	ft_free_split(tmp);
 }
