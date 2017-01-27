@@ -6,12 +6,11 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 20:29:18 by lmarques          #+#    #+#             */
-/*   Updated: 2017/01/26 19:00:15 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/01/27 18:48:13 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-#include <stdio.h>
 
 void	ft_fill_camera_position(t_env *env, char **tab, char *found)
 {
@@ -35,7 +34,7 @@ void	ft_fill_camera_position(t_env *env, char **tab, char *found)
 	}
 }
 
-void	ft_fill_camera_rotation(t_env *env, char **tab, int *e)
+void	ft_fill_camera_rotation(t_env *env, char **tab)
 {
 	if (!ft_strcmp(tab[0], "rotation.x"))
 	{
@@ -53,5 +52,5 @@ void	ft_fill_camera_rotation(t_env *env, char **tab, int *e)
 		env->camera.rotation.z = ft_atof(tab[1]);
 	}
 	else
-		*e = 1;
+		ft_puterr(ERR_FILE_SYNTAX);
 }

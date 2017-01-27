@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 01:19:41 by lmarques          #+#    #+#             */
-/*   Updated: 2017/01/27 18:15:46 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/01/27 18:55:53 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,20 +115,20 @@ typedef struct			s_env
 	char			object_filled[8];
 }						t_env;
 
+void					ft_puterr(int err);
 void					ft_init_tabs(t_env *env);
-void					ft_read_file(char *name, t_env *env, int *e);
+void					ft_read_file(char *name, t_env *env);
 int						ft_check_all(t_env *env);
 int						ft_check_object(t_env *env);
 void					ft_reset_object(t_env *env);
-void					ft_check_split(char **tab);
 void					ft_free_split(char **tab);
-void					ft_fill_scene(t_env *env, char *ln, int *e);
-void					ft_fill_scene_size(t_env *env, char **tab, int *e);
-void					ft_fill_camera(t_env *env, char *ln, int *e);
+void					ft_fill_scene(t_env *env, char *ln);
+void					ft_fill_scene_size(t_env *env, char **tab);
+void					ft_fill_camera(t_env *env, char *ln);
 void					ft_fill_camera_position(t_env *env, char **tab,
 							char *found);
-void					ft_fill_camera_rotation(t_env *env, char **tab, int *e);
-void					ft_fill_objects(t_env *env, char *ln, int *e);
+void					ft_fill_camera_rotation(t_env *env, char **tab);
+void					ft_fill_objects(t_env *env, char *ln);
 void					ft_fill_object_type(t_env *env, char **tab,
 							t_object *obj, char *found);
 void					ft_fill_object_position(t_env *env, char **tab,

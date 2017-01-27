@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 17:53:29 by lmarques          #+#    #+#             */
-/*   Updated: 2017/01/27 14:05:10 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/01/27 18:47:17 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,4 @@ void	ft_reset_object(t_env *env)
 	count = -1;
 	while (++count < 8)
 		env->object_filled[count] = 0;
-}
-
-void	ft_check_split(char **tab)
-{
-	if (!tab[1])
-	{
-		ft_putendl("error");
-		exit(1);
-	}
 }

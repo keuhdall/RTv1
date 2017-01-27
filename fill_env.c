@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 17:53:47 by lmarques          #+#    #+#             */
-/*   Updated: 2017/01/27 18:19:12 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/01/27 18:51:29 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,23 @@ void		ft_push_obj(t_obj_lst **obj_lst, t_obj_lst *new)
 	}
 }
 
-void		ft_fill_scene(t_env *env, char *ln, int *e)
+void		ft_fill_scene(t_env *env, char *ln)
 {
 	int		count;
 	char	**tmp;
 
 	count = 0;
 	tmp = ft_strsplit(ln, '=');
-	ft_check_split(tmp);
+	if (!tmp[1])
+		ft_puterr(ERR_FILE_SYNTAX);
 	if (!ft_strcmp(tmp[0], "name"))
 		env->scene.name = ft_strdup(tmp[1]);
 	else
-		ft_fill_scene_size(env, tmp, e);
+		ft_fill_scene_size(env, tmp);
 	ft_free_split(tmp);
 }
 
-void		ft_fill_objects(t_env *env, char *ln, int *e)
+void		ft_fill_objects(t_env *env, char *ln)
 {
 	int				count;
 	char			found;
@@ -67,7 +68,8 @@ void		ft_fill_objects(t_env *env, char *ln, int *e)
 	count = 0;
 	found = 0;
 	tmp = ft_strsplit(ln, '=');
-	ft_check_split(tmp);
+	if (!tmp[1])
+		ft_puterr(ERR_FILE_SYNTAX);
 	ft_fill_object_type(env, tmp, &obj, &found);
 	if (!found)
 		ft_fill_object_position(env, tmp, &obj, &found);
@@ -79,7 +81,7 @@ void		ft_fill_objects(t_env *env, char *ln, int *e)
 		obj.color = ft_atoi(tmp[1]);
 	}
 	else if (!found)
-		*e = 1;
+		ft_puterr(ERR_FILE_SYNTAX);
 	if (ft_check_object(env))
 	{
 		obj_tmp = ft_new_obj(obj);
@@ -89,7 +91,7 @@ void		ft_fill_objects(t_env *env, char *ln, int *e)
 	ft_free_split(tmp);
 }
 
-void		ft_fill_camera(t_env *env, char *ln, int *e)
+void		ft_fill_camera(t_env *env, char *ln)
 {
 	int		count;
 	char	found;
@@ -98,9 +100,10 @@ void		ft_fill_camera(t_env *env, char *ln, int *e)
 	found = 0;
 	count = 0;
 	tmp = ft_strsplit(ln, '=');
-	ft_check_split(tmp);
+	if (!tmp[1])
+		ft_puterr(ERR_FILE_SYNTAX);
 	ft_fill_camera_position(env, tmp, &found);
 	if (!found)
-		ft_fill_camera_rotation(env, tmp, e);
+		ft_fill_camera_rotation(env, tmp);
 	ft_free_split(tmp);
 }
