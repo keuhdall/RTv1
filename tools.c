@@ -6,11 +6,23 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 18:13:47 by lmarques          #+#    #+#             */
-/*   Updated: 2017/01/27 18:40:38 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/01/28 13:31:48 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+#include <stdio.h>
+
+void	ft_init_struct(t_env *env)
+{
+	env->mlx.ptr = mlx_init();
+	env->mlx.win = mlx_new_window(env->mlx.ptr, env->scene.size.x,
+		env->scene.size.y, env->scene.name);
+	env->mlx.img.ptr = mlx_new_image(env->mlx.ptr, env->scene.size.x,
+		env->scene.size.y);
+	env->mlx.img.data = (int *)mlx_get_data_addr(env->mlx.img.ptr,
+		&env->mlx.img.bpp, &env->mlx.img.size_line, &env->mlx.img.endian);
+}
 
 void	ft_free_split(char **tab)
 {

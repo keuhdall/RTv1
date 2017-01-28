@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 01:19:41 by lmarques          #+#    #+#             */
-/*   Updated: 2017/01/27 18:55:53 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/01/28 13:05:56 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define RTV1_H
 
 # include <math.h>
-//# include "./minilibx/mlx.h"
+# include "./minilibx/mlx.h"
 # include "./libft/libft.h"
 # include "./libft/get_next_line.h"
 
@@ -43,19 +43,19 @@ enum					e_errors
 
 typedef	struct			s_img
 {
-	void				*img;
+	void				*ptr;
 	int					*data;
 	int					bpp;
 	int					size_line;
 	int					endian;
 }						t_img;
 
-typedef struct			s_meta
+typedef struct			s_mlx
 {
-	void				*mlx;
+	void				*ptr;
 	void				*win;
 	t_img				img;
-}						t_meta;
+}						t_mlx;
 
 typedef struct			s_point
 {
@@ -105,11 +105,11 @@ typedef struct			s_obj_lst
 
 typedef struct			s_env
 {
-	t_meta				meta;
-	int					entity_type;
+	t_mlx				mlx;
 	t_scene				scene;
 	t_camera			camera;
 	t_obj_lst			*obj_lst;
+	int					entity_type;
 	char			scene_filled[2];
 	char			camera_filled[6];
 	char			object_filled[8];
@@ -117,6 +117,7 @@ typedef struct			s_env
 
 void					ft_puterr(int err);
 void					ft_init_tabs(t_env *env);
+void					ft_init_struct(t_env *env);
 void					ft_read_file(char *name, t_env *env);
 int						ft_check_all(t_env *env);
 int						ft_check_object(t_env *env);
