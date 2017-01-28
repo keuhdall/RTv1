@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 01:19:41 by lmarques          #+#    #+#             */
-/*   Updated: 2017/01/28 13:05:56 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/01/28 14:03:30 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,13 @@ typedef struct			s_dpoint_3d
 	double				y;
 	double				z;
 }						t_dpoint_3d;
+
+typedef struct			s_ray
+{
+	t_dpoint_3d			orig;
+	t_dpoint_3d			dest;
+	double				len;
+}						t_ray;
 
 typedef struct			s_scene
 {
