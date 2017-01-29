@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 01:19:41 by lmarques          #+#    #+#             */
-/*   Updated: 2017/01/28 14:03:30 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/01/29 23:38:49 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ enum					e_env
 enum					e_objects
 {
 						PLANE,
-						SQUARE,
 						SPHERE,
 						CYLINDER,
 						CONE
@@ -92,7 +91,12 @@ typedef struct			s_scene
 
 typedef struct			s_camera
 {
+	double				vp_width;
+	double				vp_height;
+	double				vp_dist;
+	t_dpoint_3d			vp_pos;
 	t_dpoint_3d			position;
+	t_dpoint_3d			direction;
 	t_dpoint_3d			rotation;
 }						t_camera;
 
@@ -100,6 +104,7 @@ typedef struct			s_object
 {
 	int					type;
 	int					color;
+	double				radius;
 	t_dpoint_3d			position;
 	t_dpoint_3d			rotation;
 }						t_object;
@@ -117,9 +122,9 @@ typedef struct			s_env
 	t_camera			camera;
 	t_obj_lst			*obj_lst;
 	int					entity_type;
-	char			scene_filled[2];
-	char			camera_filled[6];
-	char			object_filled[8];
+	char				scene_filled[2];
+	char				camera_filled[9];
+	char				object_filled[8];
 }						t_env;
 
 void					ft_puterr(int err);
@@ -134,6 +139,8 @@ void					ft_fill_scene(t_env *env, char *ln);
 void					ft_fill_scene_size(t_env *env, char **tab);
 void					ft_fill_camera(t_env *env, char *ln);
 void					ft_fill_camera_position(t_env *env, char **tab,
+							char *found);
+void					ft_fill_camera_direction(t_env *env, char **tab,
 							char *found);
 void					ft_fill_camera_rotation(t_env *env, char **tab);
 void					ft_fill_objects(t_env *env, char *ln);

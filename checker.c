@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 17:53:29 by lmarques          #+#    #+#             */
-/*   Updated: 2017/01/27 18:47:17 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/01/29 23:06:52 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_init_tabs(t_env *env)
 	while (++count < 2)
 		env->scene_filled[count] = 0;
 	count = -1;
-	while (++count < 6)
+	while (++count < 9)
 		env->camera_filled[count] = 0;
 	count = -1;
 	while (++count < 8)
@@ -38,7 +38,7 @@ int		ft_check_all(t_env *env)
 			return (0);
 	}
 	count = -1;
-	while (++count < 6)
+	while (++count < 9)
 	{
 		if (env->camera_filled[count] == 0)
 			return (0);
