@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 21:57:15 by lmarques          #+#    #+#             */
-/*   Updated: 2017/01/27 14:04:06 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/01/29 21:49:23 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ int		ft_get_type(char *s)
 {
 	if (!ft_strcmp(s, "PLANE"))
 		return (PLANE);
-	else if (!ft_strcmp(s, "SQUARE"))
-		return (SQUARE);
 	else if (!ft_strcmp(s, "SPHERE"))
 		return (SPHERE);
 	else if (!ft_strcmp(s, "CYLINDER"))
