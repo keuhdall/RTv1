@@ -6,12 +6,11 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 18:13:47 by lmarques          #+#    #+#             */
-/*   Updated: 2017/01/28 13:31:48 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/01/30 02:02:16 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-#include <stdio.h>
 
 void	ft_init_struct(t_env *env)
 {
@@ -22,6 +21,9 @@ void	ft_init_struct(t_env *env)
 		env->scene.size.y);
 	env->mlx.img.data = (int *)mlx_get_data_addr(env->mlx.img.ptr,
 		&env->mlx.img.bpp, &env->mlx.img.size_line, &env->mlx.img.endian);
+	env->camera.vp_width = 0.35;
+	env->camera.vp_height = 0.5;
+	env->camera.vp_dist = 1.0;
 }
 
 void	ft_free_split(char **tab)
