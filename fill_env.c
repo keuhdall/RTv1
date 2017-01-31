@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 17:53:47 by lmarques          #+#    #+#             */
-/*   Updated: 2017/01/29 23:09:20 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/01/31 20:21:33 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,6 @@ void		ft_fill_camera(t_env *env, char *ln)
 	if (!tmp[1])
 		ft_puterr(ERR_FILE_SYNTAX);
 	ft_fill_camera_position(env, tmp, &found);
-	if (!found)
-		ft_fill_camera_direction(env, tmp, &found);
 	if (!found)
 		ft_fill_camera_rotation(env, tmp);
 	ft_free_split(tmp);
