@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 01:19:41 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/01 00:16:45 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/01 00:48:31 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # define MAX_INDEX_SCENE 2
 # define MAX_INDEX_CAMERA 6
 # define MAX_INDEX_OBJECT 8
-# define VEC_UP (t_dpoint_3d) {0.0, 1.0, 0.0};
-# define VEC_RIGHT (t_dpoint_3d) {1.0, 0.0, 0.0};
+# define VEC_UP (t_dpoint_3d) {0.0, 1.0, 0.0}
+# define VEC_RIGHT (t_dpoint_3d) {1.0, 0.0, 0.0}
 
 enum					e_env
 {
