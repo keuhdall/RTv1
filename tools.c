@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 18:13:47 by lmarques          #+#    #+#             */
-/*   Updated: 2017/01/30 02:02:16 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/01 21:48:44 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,16 @@ void	ft_init_struct(t_env *env)
 	env->camera.vp_width = 0.35;
 	env->camera.vp_height = 0.5;
 	env->camera.vp_dist = 1.0;
+	/*
+	t_dpoint_3d tmp1 = ft_vprod(VEC_DIR, env->camera.vp_dist);
+	t_dpoint_3d tmp2 = ft_vprod(VEC_UP, (env->camera.vp_height / 2.0));
+	t_dpoint_3d tmp3 = ft_vprod(VEC_RIGHT, (env->camera.vp_width / 2.0));
+	env->camera.vp_pos = ft_vsum_s(env->camera.position, ft_vdiff_s(ft_vsum_s(tmp1, tmp2), tmp3));
+	*/
+	env->camera.vp_pos = ft_vsum_s(env->camera.position,
+		ft_vdiff_s(ft_vsum_s(ft_vprod(VEC_DIR, env->camera.vp_dist),
+		ft_vprod(VEC_UP, (env->camera.vp_height / 2.0))),
+		ft_vprod(VEC_RIGHT, (env->camera.vp_width / 2.0))));
 }
 
 void	ft_free_split(char **tab)

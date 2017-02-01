@@ -6,12 +6,11 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 01:48:29 by lmarques          #+#    #+#             */
-/*   Updated: 2017/01/28 13:31:27 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/01 18:23:19 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-#include <sys/wait.h>
 #include <stdio.h>
 
 int	main(int argc, char *argv[])
@@ -35,7 +34,6 @@ int	main(int argc, char *argv[])
 		printf("scene size.x : %d\n", env.scene.size.x);
 		printf("scene size.y : %d\n", env.scene.size.y);
 		printf("===============\n");
-
 		printf("====CAMERA====\n");
 		printf("camera position.x : %f\n", env.camera.position.x);
 		printf("camera position.y : %f\n", env.camera.position.y);
