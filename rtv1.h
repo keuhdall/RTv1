@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 01:19:41 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/01 00:48:31 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/01 21:42:05 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@
 # define MAX_INDEX_SCENE 2
 # define MAX_INDEX_CAMERA 6
 # define MAX_INDEX_OBJECT 8
-# define VEC_UP (t_dpoint_3d) {0.0, 1.0, 0.0}
 # define VEC_RIGHT (t_dpoint_3d) {1.0, 0.0, 0.0}
+# define VEC_UP (t_dpoint_3d) {0.0, 1.0, 0.0}
+# define VEC_DIR (t_dpoint_3d) {0.0, 0.0, 1.0}
 
 enum					e_env
 {
@@ -138,12 +139,12 @@ typedef struct			s_env
 	char				object_filled[8];
 }						t_env;
 
+int						ft_check_all(t_env *env);
+int						ft_check_object(t_env *env);
 void					ft_puterr(int err);
 void					ft_init_tabs(t_env *env);
 void					ft_init_struct(t_env *env);
 void					ft_read_file(char *name, t_env *env);
-int						ft_check_all(t_env *env);
-int						ft_check_object(t_env *env);
 void					ft_reset_object(t_env *env);
 void					ft_free_split(char **tab);
 void					ft_fill_scene(t_env *env, char *ln);
@@ -161,5 +162,14 @@ void					ft_fill_object_position(t_env *env, char **tab,
 							t_object *obj, char *found);
 void					ft_fill_object_rotation(t_env *env, char **tab,
 							t_object *obj, char *found);
+t_dpoint_3d				ft_vsum(t_dpoint_3d a, double b);
+t_dpoint_3d				ft_vdiff(t_dpoint_3d a, double b);
+t_dpoint_3d				ft_vprod(t_dpoint_3d a, double b);
+t_dpoint_3d				ft_vquo(t_dpoint_3d a, double b);
+t_dpoint_3d				ft_vsum_s(t_dpoint_3d a, t_dpoint_3d b);
+t_dpoint_3d				ft_vdiff_s(t_dpoint_3d a, t_dpoint_3d b);
+t_dpoint_3d				ft_vprod_s(t_dpoint_3d a, t_dpoint_3d b);
+t_dpoint_3d				ft_vquo_s(t_dpoint_3d a, t_dpoint_3d b);
+t_dpoint_3d				ft_calc_vdir(t_env *env, double x, double y);
 
 #endif

@@ -19,7 +19,9 @@ SRC = rtv1.c \
 		scene.c \
 		camera.c \
 		object.c \
-		tools.c
+		tools.c \
+		tools2.c \
+		tools3.c
 
 
 OBJ = $(SRC:.c=.o)
