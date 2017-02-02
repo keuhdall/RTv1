@@ -6,7 +6,7 @@
 #*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2016/11/10 23:15:25 by lmarques          #+#    #+#             *#
-#*   Updated: 2017/01/25 00:59:05 by lmarques         ###   ########.fr       *#
+#*   Updated: 2017/02/02 02:51:50 by lmarques         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -19,6 +19,7 @@ SRC = rtv1.c \
 		scene.c \
 		camera.c \
 		object.c \
+		sphere_rt.c \
 		tools.c \
 		tools2.c \
 		tools3.c

@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 01:19:41 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/01 21:42:05 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/02 02:51:25 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ typedef struct			s_dpoint_3d
 typedef struct			s_ray
 {
 	t_dpoint_3d			orig;
-	t_dpoint_3d			dest;
+	t_dpoint_3d			dir;
 	double				len;
 }						t_ray;
 
@@ -139,6 +139,7 @@ typedef struct			s_env
 	char				object_filled[8];
 }						t_env;
 
+int						ft_sphere_intersec(t_env *env, t_ray ray);
 int						ft_check_all(t_env *env);
 int						ft_check_object(t_env *env);
 void					ft_puterr(int err);

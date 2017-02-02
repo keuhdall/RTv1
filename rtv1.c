@@ -6,15 +6,41 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 01:48:29 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/01 18:23:19 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/02 03:00:51 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 #include <stdio.h>
 
+
+int	ft_intersect_obj(t_env *env, t_object obj, t_ray ray)
+{
+	if (obj.type == SPHERE)
+	{
+		if (ft_sphere_intersec(env, ray))
+			return (1);
+	}
+	return (0);
+}
+
+int	ft_raytrace(t_env *env, t_ray ray)
+{
+	t_obj_lst	*tmp;
+
+	tmp = env->obj_lst;
+	while (tmp)
+	{
+		if (ft_intersect_obj(env, tmp->obj, ray))
+			return (tmp->obj.color);
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
 int	main(int argc, char *argv[])
 {
+	t_ray		ray;
 	t_env		env;
 	t_obj_lst	*tmp;
 
@@ -66,6 +92,13 @@ int	main(int argc, char *argv[])
 		printf("%d\n", ft_check_all(&env));
 		ft_puterr(ERR_FILE_SYNTAX);
 	}
+	for (int y = 0; y < env.scene.size.y; y++)
+		for (int x = 0; x < env.scene.size.x; x++)
+		{
+			ray.orig = env.camera.position;
+			ray.dir = ft_calc_vdir(&env, (double)x, (double)y);
+			env.mlx.img.data[y * env.scene.size.x + x] = ft_raytrace(&env, ray);
+		}
 	mlx_put_image_to_window(env.mlx.ptr, env.mlx.win, env.mlx.img.ptr, 0, 0);
 	mlx_loop(env.mlx.ptr);
 	return (0);
