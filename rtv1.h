@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 01:19:41 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/02 02:51:25 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/02 13:17:04 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,26 +25,26 @@
 # define VEC_UP (t_dpoint_3d) {0.0, 1.0, 0.0}
 # define VEC_DIR (t_dpoint_3d) {0.0, 0.0, 1.0}
 
-enum					e_env
+enum	e_env
 {
-						SCENE,
-						CAMERA,
-						OBJECTS,
+	SCENE,
+	CAMERA,
+	OBJECTS,
 };
 
-enum					e_objects
+enum	e_objects
 {
-						PLANE,
-						SPHERE,
-						CYLINDER,
-						CONE
+	PLANE,
+	SPHERE,
+	CYLINDER,
+	CONE
 };
 
-enum					e_errors
+enum	e_errors
 {
-						ERR_FILE_OPEN,
-						ERR_FILE_SYNTAX,
-						ERR_INTERNAL_FAILURE
+	ERR_FILE_OPEN,
+	ERR_FILE_SYNTAX,
+	ERR_INTERNAL_FAILURE
 };
 
 typedef	struct			s_img
