@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 01:48:29 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/02 03:00:51 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/02 14:09:23 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 #include <stdio.h>
 
 
-int	ft_intersect_obj(t_env *env, t_object obj, t_ray ray)
+int	ft_intersect_obj(t_obj_lst *obj_lst, t_ray ray)
 {
-	if (obj.type == SPHERE)
+	if (obj_lst->obj.type == SPHERE)
 	{
-		if (ft_sphere_intersec(env, ray))
+		if (ft_sphere_intersec(ray, obj_lst->obj))
 			return (1);
 	}
 	return (0);
@@ -31,7 +31,7 @@ int	ft_raytrace(t_env *env, t_ray ray)
 	tmp = env->obj_lst;
 	while (tmp)
 	{
-		if (ft_intersect_obj(env, tmp->obj, ray))
+		if (ft_intersect_obj(tmp, ray))
 			return (tmp->obj.color);
 		tmp = tmp->next;
 	}

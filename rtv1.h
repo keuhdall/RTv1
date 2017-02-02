@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 01:19:41 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/02 13:17:04 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/02 14:25:03 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define VEC_RIGHT (t_dpoint_3d) {1.0, 0.0, 0.0}
 # define VEC_UP (t_dpoint_3d) {0.0, 1.0, 0.0}
 # define VEC_DIR (t_dpoint_3d) {0.0, 0.0, 1.0}
+# define RADIUS 15
 
 enum	e_env
 {
@@ -139,7 +140,7 @@ typedef struct			s_env
 	char				object_filled[8];
 }						t_env;
 
-int						ft_sphere_intersec(t_env *env, t_ray ray);
+int						ft_sphere_intersec(t_ray ray, t_object obj);
 int						ft_check_all(t_env *env);
 int						ft_check_object(t_env *env);
 void					ft_puterr(int err);
