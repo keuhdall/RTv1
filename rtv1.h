@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 01:19:41 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/02 14:25:03 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/02 15:32:36 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,5 +173,6 @@ t_dpoint_3d				ft_vdiff_s(t_dpoint_3d a, t_dpoint_3d b);
 t_dpoint_3d				ft_vprod_s(t_dpoint_3d a, t_dpoint_3d b);
 t_dpoint_3d				ft_vquo_s(t_dpoint_3d a, t_dpoint_3d b);
 t_dpoint_3d				ft_calc_vdir(t_env *env, double x, double y);
+double					ft_dotprod(t_dpoint_3d a, t_dpoint_3d b);
 
 #endif
