@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 01:48:29 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/02 14:09:23 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/03 04:26:18 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ int	main(int argc, char *argv[])
 		{
 			ray.orig = env.camera.position;
 			ray.dir = ft_calc_vdir(&env, (double)x, (double)y);
+			ray.dir = ft_normalize(ray.dir);
 			env.mlx.img.data[y * env.scene.size.x + x] = ft_raytrace(&env, ray);
 		}
 	mlx_put_image_to_window(env.mlx.ptr, env.mlx.win, env.mlx.img.ptr, 0, 0);

@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 01:19:41 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/02 15:32:36 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/03 04:25:16 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define VEC_RIGHT (t_dpoint_3d) {1.0, 0.0, 0.0}
 # define VEC_UP (t_dpoint_3d) {0.0, 1.0, 0.0}
 # define VEC_DIR (t_dpoint_3d) {0.0, 0.0, 1.0}
-# define RADIUS 15
+# define RADIUS 5
 
 enum	e_env
 {
@@ -173,6 +173,7 @@ t_dpoint_3d				ft_vdiff_s(t_dpoint_3d a, t_dpoint_3d b);
 t_dpoint_3d				ft_vprod_s(t_dpoint_3d a, t_dpoint_3d b);
 t_dpoint_3d				ft_vquo_s(t_dpoint_3d a, t_dpoint_3d b);
 t_dpoint_3d				ft_calc_vdir(t_env *env, double x, double y);
+t_dpoint_3d				ft_normalize(t_dpoint_3d v);
 double					ft_dotprod(t_dpoint_3d a, t_dpoint_3d b);
 
 #endif

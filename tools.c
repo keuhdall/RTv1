@@ -6,13 +6,13 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 18:13:47 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/01 21:48:44 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/03 04:24:08 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void	ft_init_struct(t_env *env)
+void		ft_init_struct(t_env *env)
 {
 	env->mlx.ptr = mlx_init();
 	env->mlx.win = mlx_new_window(env->mlx.ptr, env->scene.size.x,
@@ -36,7 +36,7 @@ void	ft_init_struct(t_env *env)
 		ft_vprod(VEC_RIGHT, (env->camera.vp_width / 2.0))));
 }
 
-void	ft_free_split(char **tab)
+void		ft_free_split(char **tab)
 {
 	int	count;
 
@@ -49,7 +49,7 @@ void	ft_free_split(char **tab)
 	free(tab);
 }
 
-void	ft_puterr(int err)
+void		ft_puterr(int err)
 {
 	if (err == ERR_FILE_OPEN)
 		ft_putendl("Error : could not open this file");
@@ -58,4 +58,16 @@ void	ft_puterr(int err)
 	else if (err == ERR_INTERNAL_FAILURE)
 		ft_putendl("Fatal : internal failure. What have you done ?!");
 	exit(1);
+}
+
+t_dpoint_3d	ft_normalize(t_dpoint_3d v)
+{
+	double		len;
+	t_dpoint_3d	normalized;
+
+	len = ft_dotprod(v, v);
+	normalized.x = v.x / len;
+	normalized.y = v.y / len;
+	normalized.z = v.z / len;
+	return (normalized);
 }
