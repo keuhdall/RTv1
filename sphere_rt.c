@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/28 12:46:18 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/03 04:06:25 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/04 23:08:20 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,11 @@
 
 int	ft_sphere_intersec(t_ray ray, t_object obj)
 {
-	t_dpoint_3d	tmp;
 	double		delta;
 	double		a, b, c;
 
-	tmp = ray.dir;
-	a = ft_dotprod(tmp, tmp);
-	b = 2 * ft_dotprod(tmp, obj.position);
+	a = ft_dotprod(ray.dir, ray.dir);
+	b = 2 * ft_dotprod(ray.dir, obj.position);
 	c = ft_dotprod(obj.position, obj.position) - RADIUS * RADIUS;
 	delta = pow(b, 2) - 4 * a * c;
 	if (delta < 0)
