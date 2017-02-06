@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 17:53:47 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/02 14:01:43 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/06 14:29:05 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ void		ft_fill_objects(t_env *env, char *ln)
 	if (!tmp[1])
 		ft_puterr(ERR_FILE_SYNTAX);
 	ft_fill_object_type(env, tmp, &obj, &found);
+	if (!found)
+		ft_fill_object_size(env, tmp, &obj, &found);
 	if (!found)
 		ft_fill_object_position(env, tmp, &obj, &found);
 	if (!found)

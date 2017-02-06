@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 21:57:15 by lmarques          #+#    #+#             */
-/*   Updated: 2017/01/29 21:49:23 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/06 14:33:51 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ int		ft_get_type(char *s)
 {
 	if (!ft_strcmp(s, "PLANE"))
 		return (PLANE);
-	else if (!ft_strcmp(s, "SPHERE"))
+	if (!ft_strcmp(s, "SPHERE"))
 		return (SPHERE);
-	else if (!ft_strcmp(s, "CYLINDER"))
+	if (!ft_strcmp(s, "CYLINDER"))
 		return (CYLINDER);
-	else if (!ft_strcmp(s, "CONE"))
+	if (!ft_strcmp(s, "CONE"))
 		return (CONE);
 	else
 	{
@@ -82,6 +82,16 @@ void	ft_fill_object_rotation(t_env *env, char **tab, t_object *obj,
 	{
 		env->object_filled[7] = 1;
 		obj->rotation.z = ft_atof(tab[1]);
+		*found = 1;
+	}
+}
+
+void	ft_fill_object_size(t_env *env, char **tab, t_object *obj, char *found)
+{
+	if (!ft_strcmp(tab[0], "size"))
+	{
+		env->object_filled[8] = 1;
+		obj->size = ft_atoi(tab[1]);
 		*found = 1;
 	}
 }

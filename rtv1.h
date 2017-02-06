@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 01:19:41 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/03 04:25:16 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/06 14:51:47 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include "./libft/get_next_line.h"
 
 # define MAX_INDEX_SCENE 2
-# define MAX_INDEX_CAMERA 6
-# define MAX_INDEX_OBJECT 8
+# define MAX_INDEX_CAMERA 5
+# define MAX_INDEX_OBJECT 9
 # define VEC_RIGHT (t_dpoint_3d) {1.0, 0.0, 0.0}
 # define VEC_UP (t_dpoint_3d) {0.0, 1.0, 0.0}
 # define VEC_DIR (t_dpoint_3d) {0.0, 0.0, 1.0}
@@ -45,6 +45,7 @@ enum	e_errors
 {
 	ERR_FILE_OPEN,
 	ERR_FILE_SYNTAX,
+	ERR_NO_OBJ,
 	ERR_INTERNAL_FAILURE
 };
 
@@ -116,6 +117,7 @@ typedef struct			s_camera
 typedef struct			s_object
 {
 	int					type;
+	int					size;
 	int					color;
 	double				radius;
 	t_dpoint_3d			position;
@@ -137,10 +139,11 @@ typedef struct			s_env
 	int					entity_type;
 	char				scene_filled[2];
 	char				camera_filled[9];
-	char				object_filled[8];
+	char				object_filled[9];
 }						t_env;
 
 int						ft_sphere_intersec(t_ray ray, t_object obj);
+int						ft_plane_intersec(t_ray ray, t_object obj);
 int						ft_check_all(t_env *env);
 int						ft_check_object(t_env *env);
 void					ft_puterr(int err);
@@ -159,6 +162,8 @@ void					ft_fill_camera_direction(t_env *env, char **tab,
 void					ft_fill_camera_rotation(t_env *env, char **tab);
 void					ft_fill_objects(t_env *env, char *ln);
 void					ft_fill_object_type(t_env *env, char **tab,
+							t_object *obj, char *found);
+void					ft_fill_object_size(t_env *env, char **tab,
 							t_object *obj, char *found);
 void					ft_fill_object_position(t_env *env, char **tab,
 							t_object *obj, char *found);
