@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 01:54:38 by lmarques          #+#    #+#             */
-/*   Updated: 2017/01/27 18:58:50 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/06 20:14:30 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	ft_fill_env(t_env *env, char *ln)
 		ft_fill_objects(env, ln);
 	else if (env->entity_type == CAMERA)
 		ft_fill_camera(env, ln);
+	else if (env->entity_type == SPOTS)
+		ft_fill_spots(env, ln);
 	else
 		ft_puterr(ERR_FILE_SYNTAX);
 }
@@ -32,6 +34,8 @@ void	ft_get_entity(t_env *env, char *ln)
 		env->entity_type = CAMERA;
 	else if (!ft_strcmp(ln, "[objects]"))
 		env->entity_type = OBJECTS;
+	else if (!ft_strcmp(ln, "[spots]"))
+		env->entity_type = SPOTS;
 	else
 		ft_puterr(ERR_FILE_SYNTAX);
 }

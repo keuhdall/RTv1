@@ -6,42 +6,11 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 17:53:47 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/06 16:08:24 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/06 23:17:02 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-
-t_obj_lst	*ft_new_obj(t_object obj)
-{
-	t_obj_lst	*tmp;
-
-	if (!(tmp = (t_obj_lst *)malloc(sizeof(t_obj_lst))))
-		return (NULL);
-	tmp->obj.type = obj.type;
-	tmp->obj.size = obj.size;
-	tmp->obj.position = obj.position;
-	tmp->obj.rotation = obj.rotation;
-	tmp->obj.color = obj.color;
-	tmp->next = NULL;
-	return (tmp);
-}
-
-void		ft_push_obj(t_obj_lst **obj_lst, t_obj_lst *new)
-{
-	t_obj_lst	*tmp;
-
-	tmp = NULL;
-	tmp = *obj_lst;
-	if (!tmp)
-		*obj_lst = new;
-	else
-	{
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new;
-	}
-}
 
 void		ft_fill_scene(t_env *env, char *ln)
 {
@@ -61,13 +30,11 @@ void		ft_fill_scene(t_env *env, char *ln)
 
 void		ft_fill_objects(t_env *env, char *ln)
 {
-	int				count;
 	char			found;
 	char			**tmp;
 	static t_object	obj;
 	t_obj_lst		*obj_tmp;
 
-	count = 0;
 	found = 0;
 	tmp = ft_strsplit(ln, '=');
 	if (!tmp[1])
@@ -86,11 +53,34 @@ void		ft_fill_objects(t_env *env, char *ln)
 	}
 	else if (!found)
 		ft_puterr(ERR_FILE_SYNTAX);
-	if (ft_check_object(env))
+	if (ft_check_entity(env, OBJECTS))
 	{
 		obj_tmp = ft_new_obj(obj);
 		ft_push_obj(&env->obj_lst, obj_tmp);
-		ft_reset_object(env);
+		ft_reset(env, OBJECTS);
+	}
+	ft_free_split(tmp);
+}
+
+void		ft_fill_spots(t_env *env, char *ln)
+{
+	char			found;
+	char			**tmp;
+	static t_spot	spot;
+	t_spot_lst		*spot_tmp;
+
+	found = 0;
+	tmp = ft_strsplit(ln, '=');
+	if (!tmp[1])
+		ft_puterr(ERR_FILE_SYNTAX);
+	ft_fill_spot_position(env, tmp, &spot, &found);
+	if (!found)
+		ft_puterr(ERR_FILE_SYNTAX);
+	if (ft_check_entity(env, SPOTS))
+	{
+		spot_tmp = ft_new_spot(spot);
+		ft_push_spot(&env->spot_lst, spot_tmp);
+		ft_reset(env, SPOTS);
 	}
 	ft_free_split(tmp);
 }

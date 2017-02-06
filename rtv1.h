@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 01:19:41 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/06 14:51:47 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/06 23:28:26 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@
 # include "./libft/get_next_line.h"
 
 # define MAX_INDEX_SCENE 2
-# define MAX_INDEX_CAMERA 5
+# define MAX_INDEX_CAMERA 6
 # define MAX_INDEX_OBJECT 9
+#define MAX_INDEX_SPOT 3
 # define VEC_RIGHT (t_dpoint_3d) {1.0, 0.0, 0.0}
 # define VEC_UP (t_dpoint_3d) {0.0, 1.0, 0.0}
 # define VEC_DIR (t_dpoint_3d) {0.0, 0.0, 1.0}
@@ -31,6 +32,7 @@ enum	e_env
 	SCENE,
 	CAMERA,
 	OBJECTS,
+	SPOTS
 };
 
 enum	e_objects
@@ -130,27 +132,40 @@ typedef struct			s_obj_lst
 	struct s_obj_lst	*next;
 }						t_obj_lst;
 
+typedef struct			s_spot
+{
+	t_dpoint_3d			position;
+}						t_spot;
+
+typedef struct			s_spot_lst
+{
+	t_spot				spot;
+	struct s_spot_lst	*next;
+}						t_spot_lst;
+
 typedef struct			s_env
 {
 	t_mlx				mlx;
 	t_scene				scene;
 	t_camera			camera;
 	t_obj_lst			*obj_lst;
+	t_spot_lst			*spot_lst;
 	int					entity_type;
-	char				scene_filled[2];
-	char				camera_filled[9];
-	char				object_filled[9];
+	char				scene_filled[MAX_INDEX_SCENE];
+	char				camera_filled[MAX_INDEX_CAMERA];
+	char				object_filled[MAX_INDEX_OBJECT];
+	char				spot_filled[MAX_INDEX_SPOT];
 }						t_env;
 
 int						ft_sphere_intersec(t_ray ray, t_object obj);
 int						ft_plane_intersec(t_ray ray, t_object obj);
 int						ft_check_all(t_env *env);
-int						ft_check_object(t_env *env);
+int						ft_check_entity(t_env *env, int entity_type);
 void					ft_puterr(int err);
 void					ft_init_tabs(t_env *env);
 void					ft_init_struct(t_env *env);
 void					ft_read_file(char *name, t_env *env);
-void					ft_reset_object(t_env *env);
+void					ft_reset(t_env *env, int entity_type);
 void					ft_free_split(char **tab);
 void					ft_fill_scene(t_env *env, char *ln);
 void					ft_fill_scene_size(t_env *env, char **tab);
@@ -169,6 +184,9 @@ void					ft_fill_object_position(t_env *env, char **tab,
 							t_object *obj, char *found);
 void					ft_fill_object_rotation(t_env *env, char **tab,
 							t_object *obj, char *found);
+void					ft_fill_spots(t_env *env, char *ln);
+void					ft_fill_spot_position(t_env *env, char **tab,
+							t_spot *spot, char *found);
 t_dpoint_3d				ft_vsum(t_dpoint_3d a, double b);
 t_dpoint_3d				ft_vdiff(t_dpoint_3d a, double b);
 t_dpoint_3d				ft_vprod(t_dpoint_3d a, double b);
@@ -180,5 +198,9 @@ t_dpoint_3d				ft_vquo_s(t_dpoint_3d a, t_dpoint_3d b);
 t_dpoint_3d				ft_calc_vdir(t_env *env, double x, double y);
 t_dpoint_3d				ft_normalize(t_dpoint_3d v);
 double					ft_dotprod(t_dpoint_3d a, t_dpoint_3d b);
+t_obj_lst				*ft_new_obj(t_object obj);
+void					ft_push_obj(t_obj_lst **obj_lst, t_obj_lst *new);
+t_spot_lst				*ft_new_spot(t_spot spot);
+void					ft_push_spot(t_spot_lst **spot_lst, t_spot_lst *new);
 
 #endif
