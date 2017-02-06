@@ -19,6 +19,7 @@ SRC = rtv1.c \
 		scene.c \
 		camera.c \
 		object.c \
+		plane_rt.c \
 		sphere_rt.c \
 		tools.c \
 		tools2.c \
@@ -34,8 +35,8 @@ $(NAME): $(OBJ)
 		make -C minilibx
 		mv libft/libft.a .
 		mv minilibx/libmlx.a .
-		gcc -Wall -Werror -Wextra -c $(SRC)
-		gcc -Wall -Werror -Wextra -L. -lmlx -lft -framework OpenGL -framework Appkit $(OBJ) -o $(NAME)
+		gcc -Wall -g -Werror -Wextra -c $(SRC)
+		gcc -Wall -g -Werror -Wextra -L. -lmlx -lft -framework OpenGL -framework Appkit $(OBJ) -o $(NAME)
 
 clean:
 		make -C libft clean
