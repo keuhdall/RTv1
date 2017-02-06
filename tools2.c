@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 17:59:54 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/01 22:02:57 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/05 20:36:16 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ t_dpoint_3d	ft_calc_vdir(t_env *env, double x, double y)
 
 	indent.x = env->camera.vp_width / (double)env->scene.size.x;
 	indent.y = env->camera.vp_height / (double)env->scene.size.y;
-	tmp1 = ft_vprod(ft_vprod(VEC_RIGHT, indent.x), x);
-	tmp2 = ft_vprod(ft_vprod(VEC_UP, indent.y), y);
+	tmp1 = ft_vprod(VEC_RIGHT, indent.x * x);
+	tmp2 = ft_vprod(VEC_UP, indent.y * y);
 	return (ft_vdiff_s(ft_vsum_s(env->camera.vp_pos, ft_vdiff_s(tmp1, tmp2)),
 		env->camera.position));
 }
