@@ -6,12 +6,11 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 19:00:24 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/06 23:08:30 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/06 23:56:27 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-
 
 t_obj_lst	*ft_new_obj(t_object obj)
 {
@@ -47,6 +46,7 @@ void		ft_push_obj(t_obj_lst **obj_lst, t_obj_lst *new)
 t_spot_lst	*ft_new_spot(t_spot spot)
 {
 	t_spot_lst	*tmp;
+
 	if (!(tmp = (t_spot_lst *)malloc(sizeof(t_spot_lst))))
 		return (NULL);
 	tmp->spot.position = spot.position;
