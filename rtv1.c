@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 01:48:29 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/06 16:07:24 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/06 23:43:13 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,11 @@ int	main(int argc, char *argv[])
 {
 	t_ray		ray;
 	t_env		env;
-	t_obj_lst	*tmp;
+	t_obj_lst	*tmp_obj;
+	t_spot_lst	*tmp_spot;
 
 	env.obj_lst = NULL;
+	env.spot_lst = NULL;
 	ft_init_tabs(&env);
 	ft_read_file(argv[1], &env);
 	ft_init_struct(&env);
@@ -74,24 +76,35 @@ int	main(int argc, char *argv[])
 		printf("camera rotation.z : %f\n", env.camera.position.z);
 		printf("==============\n");
 		printf("\n");
-		tmp = env.obj_lst;
-		if (!tmp)
+		tmp_obj = env.obj_lst;
+		tmp_spot = env.spot_lst;
+		if (!tmp_obj)
 			ft_puterr(ERR_NO_OBJ);
-		while (tmp)
+		while (tmp_obj)
 		{
 			printf("=====NEW OBJECT=====\n");
-			printf("object size : %d\n", tmp->obj.size);
-			printf("object position.x : %f\n", tmp->obj.position.x);
-			printf("object position.y : %f\n", tmp->obj.position.y);
-			printf("object position.z : %f\n", tmp->obj.position.z);
+			printf("object size : %d\n", tmp_obj->obj.size);
+			printf("object position.x : %f\n", tmp_obj->obj.position.x);
+			printf("object position.y : %f\n", tmp_obj->obj.position.y);
+			printf("object position.z : %f\n", tmp_obj->obj.position.z);
 			printf("\n");
-			printf("object rotation.x : %f\n", tmp->obj.rotation.x);
-			printf("object rotation.y : %f\n", tmp->obj.rotation.y);
-			printf("object rotation.z : %f\n", tmp->obj.rotation.z);
-			printf("color = %d\n", tmp->obj.color);
+			printf("object rotation.x : %f\n", tmp_obj->obj.rotation.x);
+			printf("object rotation.y : %f\n", tmp_obj->obj.rotation.y);
+			printf("object rotation.z : %f\n", tmp_obj->obj.rotation.z);
+			printf("color = %d\n", tmp_obj->obj.color);
 			printf("====================\n");
 			printf("\n");
-			tmp = tmp->next;
+			tmp_obj = tmp_obj->next;
+		}
+		while (tmp_spot)
+		{
+			printf("====NEW SPOT====\n");
+			printf("spot position.x : %f\n", tmp_spot->spot.position.x);
+			printf("spot position.y : %f\n", tmp_spot->spot.position.y);
+			printf("spot position.z : %f\n", tmp_spot->spot.position.z);
+			printf("================\n");
+			printf("\n");
+			tmp_spot = tmp_spot->next;
 		}
 	}
 	else
