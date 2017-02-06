@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 18:46:12 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/02 15:31:42 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/06 14:24:28 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,5 @@ t_dpoint_3d	ft_vquo_s(t_dpoint_3d a, t_dpoint_3d b)
 
 double		ft_dotprod(t_dpoint_3d a, t_dpoint_3d b)
 {
-	return(a.x * b.x + a.y * b.y + a.z * b.z);
+	return (a.x * b.x + a.y * b.y + a.z * b.z);
 }
