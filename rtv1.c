@@ -6,29 +6,12 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 01:48:29 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/04 22:03:46 by                  ###   ########.fr       */
+/*   Updated: 2017/02/06 16:07:24 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 #include <stdio.h>
-
-//NOT WORKING AT ALL
-int	ft_intersect_plane(t_ray ray, t_object obj)
-{
-	t_dpoint_3d	tmp;
-	tmp.x = RADIUS;
-	tmp.y = RADIUS;
-	tmp.z = RADIUS;
-	tmp = ft_normalize(tmp);
-	double	a, b;
-
-	a = ft_dotprod(tmp, ft_vdiff_s(ray.orig, obj.position));
-	b = ft_dotprod(tmp, ray.dir);
-	if (!b)
-		return (0);
-	return (a / b < 0 ? 0 : 1);
-}
 
 int	ft_intersect_obj(t_obj_lst *obj_lst, t_ray ray)
 {
@@ -39,7 +22,7 @@ int	ft_intersect_obj(t_obj_lst *obj_lst, t_ray ray)
 	}
 	else if (obj_lst->obj.type == PLANE)
 	{
-		if (ft_intersect_plane(ray, obj_lst->obj))
+		if (ft_plane_intersec(ray, obj_lst->obj))
 			return (1);
 	}
 	return (0);
@@ -92,9 +75,12 @@ int	main(int argc, char *argv[])
 		printf("==============\n");
 		printf("\n");
 		tmp = env.obj_lst;
+		if (!tmp)
+			ft_puterr(ERR_NO_OBJ);
 		while (tmp)
 		{
 			printf("=====NEW OBJECT=====\n");
+			printf("object size : %d\n", tmp->obj.size);
 			printf("object position.x : %f\n", tmp->obj.position.x);
 			printf("object position.y : %f\n", tmp->obj.position.y);
 			printf("object position.z : %f\n", tmp->obj.position.z);

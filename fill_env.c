@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 17:53:47 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/06 14:29:05 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/06 16:08:24 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_obj_lst	*ft_new_obj(t_object obj)
 	if (!(tmp = (t_obj_lst *)malloc(sizeof(t_obj_lst))))
 		return (NULL);
 	tmp->obj.type = obj.type;
+	tmp->obj.size = obj.size;
 	tmp->obj.position = obj.position;
 	tmp->obj.rotation = obj.rotation;
 	tmp->obj.color = obj.color;
