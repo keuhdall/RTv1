@@ -19,8 +19,10 @@ SRC = rtv1.c \
 		scene.c \
 		camera.c \
 		object.c \
+		lists.c \
 		plane_rt.c \
 		sphere_rt.c \
+		spot.c \
 		tools.c \
 		tools2.c \
 		tools3.c
