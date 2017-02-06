@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 18:13:47 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/04 23:11:35 by                  ###   ########.fr       */
+/*   Updated: 2017/02/06 14:54:03 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,10 @@ void		ft_init_struct(t_env *env)
 		env->scene.size.y);
 	env->mlx.img.data = (int *)mlx_get_data_addr(env->mlx.img.ptr,
 		&env->mlx.img.bpp, &env->mlx.img.size_line, &env->mlx.img.endian);
-	env->camera.vp_width = 0.35;
-	env->camera.vp_height = 0.5;
+	env->camera.vp_height = 1.0;
+	env->camera.vp_width = 1.0 / ((double)env->scene.size.y /
+		(double)env->scene.size.x);
 	env->camera.vp_dist = 1.0;
-	/*
-	t_dpoint_3d tmp1 = ft_vprod(VEC_DIR, env->camera.vp_dist);
-	t_dpoint_3d tmp2 = ft_vprod(VEC_UP, (env->camera.vp_height / 2.0));
-	t_dpoint_3d tmp3 = ft_vprod(VEC_RIGHT, (env->camera.vp_width / 2.0));
-	env->camera.vp_pos = ft_vsum_s(env->camera.position, ft_vdiff_s(ft_vsum_s(tmp1, tmp2), tmp3));
-	*/
 	env->camera.vp_pos = ft_vsum_s(env->camera.position,
 		ft_vdiff_s(ft_vsum_s(ft_vprod(VEC_DIR, env->camera.vp_dist),
 		ft_vprod(VEC_UP, (env->camera.vp_height / 2.0))),
@@ -57,6 +52,8 @@ void		ft_puterr(int err)
 		ft_putendl("Error : invalid file");
 	else if (err == ERR_INTERNAL_FAILURE)
 		ft_putendl("Fatal : internal failure. What have you done ?!");
+	else if (err == ERR_NO_OBJ)
+		ft_putendl("Error : no object found, it's either incomplete or empty");
 	exit(1);
 }
 
@@ -65,9 +62,7 @@ t_dpoint_3d	ft_normalize(t_dpoint_3d v)
 	double		len;
 	t_dpoint_3d	normalized;
 
-	len = ft_dotprod(v, v);
-	normalized.x = v.x / len;
-	normalized.y = v.y / len;
-	normalized.z = v.z / len;
+	len = sqrt(ft_dotprod(v, v));
+	normalized = ft_vquo(v, len);
 	return (normalized);
 }
