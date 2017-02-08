@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 01:19:41 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/06 23:28:26 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/07 22:59:13 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ typedef struct			s_camera
 	double				vp_width;
 	double				vp_height;
 	double				vp_dist;
+	double				dist_obj;
 	t_dpoint_3d			vp_pos;
 	t_dpoint_3d			position;
 	t_dpoint_3d			rotation;
@@ -121,9 +122,11 @@ typedef struct			s_object
 	int					type;
 	int					size;
 	int					color;
+	double				shade;
 	double				radius;
 	t_dpoint_3d			position;
 	t_dpoint_3d			rotation;
+	t_dpoint_3d			intersec;
 }						t_object;
 
 typedef struct			s_obj_lst
@@ -157,7 +160,8 @@ typedef struct			s_env
 	char				spot_filled[MAX_INDEX_SPOT];
 }						t_env;
 
-int						ft_sphere_intersec(t_ray ray, t_object obj);
+int						ft_sphere_intersec(t_env *env, t_ray ray,
+							t_object *obj);
 int						ft_plane_intersec(t_ray ray, t_object obj);
 int						ft_check_all(t_env *env);
 int						ft_check_entity(t_env *env, int entity_type);

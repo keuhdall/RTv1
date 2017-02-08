@@ -6,19 +6,44 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 01:48:29 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/06 23:43:13 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/08 02:09:14 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 #include <stdio.h>
 
-int	ft_intersect_obj(t_obj_lst *obj_lst, t_ray ray)
+double	ft_calc_shade(t_object obj, t_spot spot)
+{
+	double	shade;
+
+	shade = ft_dotprod(ft_normalize(ft_vsum_s(spot.position, obj.intersec)),
+						ft_normalize(ft_vsum_s(obj.intersec, obj.position)));
+	return (shade < 0 ? 0.0 : shade);
+}
+
+int	ft_calc_color(t_object obj)
+{
+	int	color;
+
+	color = obj.color;
+	obj.color = (int)((double)(color & 0x0000FF) * (0.20 + 0.80 * obj.shade)) & 0x0000FF;
+	obj.color += (int)((double)(color & 0x00FF00) * (0.20 + 0.80 * obj.shade)) & 0x00FF00;
+	obj.color += (int)((double)(color & 0xFF0000) * (0.20 + 0.80 * obj.shade)) & 0xFF0000;
+	return (obj.color);
+}
+
+int	ft_intersect_obj(t_env *env, t_obj_lst *obj_lst, t_spot_lst *spot_lst,
+	t_ray ray)
 {
 	if (obj_lst->obj.type == SPHERE)
 	{
-		if (ft_sphere_intersec(ray, obj_lst->obj))
+		if (ft_sphere_intersec(env, ray, &obj_lst->obj))
+		{
+			obj_lst->obj.shade = ft_calc_shade(obj_lst->obj, spot_lst->spot);
+			obj_lst->obj.color = ft_calc_color(obj_lst->obj);
 			return (1);
+		}
 	}
 	else if (obj_lst->obj.type == PLANE)
 	{
@@ -30,14 +55,23 @@ int	ft_intersect_obj(t_obj_lst *obj_lst, t_ray ray)
 
 int	ft_raytrace(t_env *env, t_ray ray)
 {
-	t_obj_lst	*tmp;
+	t_obj_lst	*tmp_obj;
+	t_spot_lst	*tmp_spot;
 
-	tmp = env->obj_lst;
-	while (tmp)
+	tmp_spot = env->spot_lst;
+	while (tmp_spot)
 	{
-		if (ft_intersect_obj(tmp, ray))
-			return (tmp->obj.color);
-		tmp = tmp->next;
+		tmp_obj = env->obj_lst;
+		while (tmp_obj)
+		{
+			if (ft_intersect_obj(env, tmp_obj, tmp_spot, ray))
+			{
+				printf("color = %d\n", tmp_obj->obj.color);
+				return (tmp_obj->obj.color);
+			}
+			tmp_obj = tmp_obj->next;
+		}
+		tmp_spot = tmp_spot->next;
 	}
 	return (0);
 }
