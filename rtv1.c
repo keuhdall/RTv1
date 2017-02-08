@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 01:48:29 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/08 02:09:14 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/08 15:54:47 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ double	ft_calc_shade(t_object obj, t_spot spot)
 {
 	double	shade;
 
-	shade = ft_dotprod(ft_normalize(ft_vsum_s(spot.position, obj.intersec)),
-						ft_normalize(ft_vsum_s(obj.intersec, obj.position)));
+	shade = ft_dotprod(ft_normalize(ft_vdiff_s(spot.position, obj.intersec)),
+						ft_normalize(ft_vdiff_s(obj.intersec, obj.position)));
 	return (shade < 0 ? 0.0 : shade);
 }
 
@@ -65,10 +65,7 @@ int	ft_raytrace(t_env *env, t_ray ray)
 		while (tmp_obj)
 		{
 			if (ft_intersect_obj(env, tmp_obj, tmp_spot, ray))
-			{
-				printf("color = %d\n", tmp_obj->obj.color);
 				return (tmp_obj->obj.color);
-			}
 			tmp_obj = tmp_obj->next;
 		}
 		tmp_spot = tmp_spot->next;
