@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 01:19:41 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/11 02:10:07 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/11 13:59:15 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,6 @@ typedef struct			s_camera
 	double				vp_width;
 	double				vp_height;
 	double				vp_dist;
-	double				dist_obj;
 	t_dpoint_3d			vp_pos;
 	t_dpoint_3d			position;
 	t_dpoint_3d			rotation;
@@ -135,6 +134,7 @@ typedef struct			s_object
 	t_dpoint_3d			position;
 	t_dpoint_3d			rotation;
 	t_dpoint_3d			intersec;
+	t_dpoint_3d			normal;
 }						t_object;
 
 typedef struct			s_obj_lst
@@ -168,8 +168,7 @@ typedef struct			s_env
 	char				spot_filled[MAX_INDEX_SPOT];
 }						t_env;
 
-int						ft_sphere_intersec(t_env *env, t_ray ray,
-							t_object *obj);
+int						ft_sphere_intersec(t_object *obj, t_ray ray);
 int						ft_plane_intersec(t_ray ray, t_object obj);
 int						ft_check_all(t_env *env);
 int						ft_check_entity(t_env *env, int entity_type);
@@ -209,6 +208,7 @@ t_dpoint_3d				ft_vprod_s(t_dpoint_3d a, t_dpoint_3d b);
 t_dpoint_3d				ft_vquo_s(t_dpoint_3d a, t_dpoint_3d b);
 t_dpoint_3d				ft_calc_vdir(t_env *env, double x, double y);
 t_dpoint_3d				ft_normalize(t_dpoint_3d v);
+t_dpoint_3d				ft_vnegative(t_dpoint_3d v);
 double					ft_dotprod(t_dpoint_3d a, t_dpoint_3d b);
 t_obj_lst				*ft_new_obj(t_object obj);
 void					ft_push_obj(t_obj_lst **obj_lst, t_obj_lst *new);

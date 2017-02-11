@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 18:13:47 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/06 14:54:03 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/11 14:23:04 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,12 @@ t_dpoint_3d	ft_normalize(t_dpoint_3d v)
 	len = sqrt(ft_dotprod(v, v));
 	normalized = ft_vquo(v, len);
 	return (normalized);
+}
+
+t_dpoint_3d	ft_vnegative(t_dpoint_3d v)
+{
+	v.x = -v.x;
+	v.y = -v.y;
+	v.z = -v.z;
+	return (v);
 }

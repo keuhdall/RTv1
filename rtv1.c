@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 01:48:29 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/11 04:21:59 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/11 14:48:45 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int		ft_color_int(t_color c)
 {
-	return (c.r * 255 * c.g * 255 * c.b * 255);
+	return ((c.r * 255) + (c.g * 255) + (c.b * 255));
 }
 
 void	ft_ppixel(t_env *env, int x, int y, t_color c)
@@ -40,18 +40,24 @@ t_color	ft_mult_color(t_color c, double i)
 
 t_color	ft_calc_shade(t_object obj, t_spot spot)
 {
-	double	shade;
+	double		shade;
 
-	shade = ft_dotprod(ft_normalize(ft_vdiff_s(spot.position, obj.intersec)),
-						ft_normalize(ft_vdiff_s(obj.intersec, obj.position)));
-	return (shade < 0 ? (t_color){0.0, 0.0, 0.0} : ft_mult_color(obj.color2, shade * 1.0));
+	printf("intersec = %f; %f; %f\n", obj.intersec.x, obj.intersec.y, obj.intersec.z);
+	printf("normal = %f; %f; %f\n", obj.normal.x, obj.normal.y, obj.normal.z);
+	shade = ft_dotprod(
+			//ft_normalize(ft_vdiff_s(spot.position, obj.intersec)),
+			obj.normal,
+			ft_vnegative(ft_normalize(ft_vdiff_s(obj.intersec, spot.position))));
+	//printf("shade = %f\n", shade);
+	return (shade < 0 ? (t_color){0.0, 0.0, 0.0} : ft_mult_color(
+		ft_mult_color(obj.color2, 1.0), shade * 1.0));
 }
 
-int	ft_intersect_obj(t_env *env, t_obj_lst *obj_lst, t_ray ray)
+int	ft_intersect_obj(t_obj_lst *obj_lst, t_ray ray)
 {
 	if (obj_lst->obj.type == SPHERE)
 	{
-		if (ft_sphere_intersec(env, ray, &obj_lst->obj))
+		if (ft_sphere_intersec(&obj_lst->obj, ray))
 			return (1);
 	}
 	else if (obj_lst->obj.type == PLANE)
@@ -69,15 +75,21 @@ t_object	*ft_get_closest_obj(t_env *env, t_ray ray)
 	t_dpoint	dists;
 
 	tmp_obj = env->obj_lst;
+	closest_obj = NULL;
 	dists.x = 999999;
 	while (tmp_obj)
 	{
-		if (ft_intersect_obj(env, tmp_obj, ray))
+		if (ft_intersect_obj(tmp_obj, ray))
 		{
 			dists.y = ft_dotprod(ft_vdiff_s(tmp_obj->obj.intersec, ray.orig),
 								ft_vdiff_s(tmp_obj->obj.intersec, ray.orig));
-			dists.x = dists.y < dists.x ? dists.y : dists.x;
-			closest_obj = dists.y < dists.x ? &tmp_obj->obj : closest_obj;
+			//dists.x = dists.y < dists.x ? dists.y : dists.x;
+			//closest_obj = dists.y < dists.x ? &tmp_obj->obj : closest_obj;
+			if (dists.y < dists.x)
+			{
+				dists.x = dists.y;
+				closest_obj = &tmp_obj->obj;
+			}
 		}
 		tmp_obj = tmp_obj->next;
 	}
@@ -98,7 +110,9 @@ t_color	ft_raytrace(t_env *env, t_ray ray)
 	while (tmp_spot)
 	{
 		//ft_normalize(ft_vdiff_s(tmp_spot->spot.position, closest->intersec));
-		final_color = ft_add_color(ft_calc_shade(*closest, tmp_spot->spot), final_color);
+		final_color = ft_add_color(ft_calc_shade(*closest, tmp_spot->spot),
+			final_color);
+		//return ((t_color){1.0, 1.0, 1.0});
 		tmp_spot = tmp_spot->next;
 	}
 	return (final_color);
