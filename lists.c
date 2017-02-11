@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 19:00:24 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/06 23:56:27 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/11 02:59:08 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_obj_lst	*ft_new_obj(t_object obj)
 	tmp->obj.position = obj.position;
 	tmp->obj.rotation = obj.rotation;
 	tmp->obj.color = obj.color;
+	tmp->obj.color2 = (t_color){1.0, 1.0, 0.0};
 	tmp->next = NULL;
 	return (tmp);
 }

@@ -6,13 +6,13 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/28 12:46:18 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/07 23:02:32 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/11 02:20:15 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-double		ft_calc_dist(t_dpoint_3d eq, double delta)
+double		ft_solve_eq(t_dpoint_3d eq, double delta)
 {
 	t_dpoint_3d	t;
 
@@ -40,9 +40,10 @@ int			ft_sphere_intersec(t_env *env, t_ray ray, t_object *obj)
 		return (0);
 	else
 	{
-		env->camera.dist_obj = ft_calc_dist(p, (double)sqrt(delta));
+		//env->camera.dist_obj = ft_solve_eq(p, (double)sqrt(delta));
+		env->camera.dist_obj = env->camera.dist_obj;;
 		obj->intersec = ft_vsum_s(ray.orig, ft_vprod(ray.dir,
-			env->camera.dist_obj));
+			ft_solve_eq(p, (double)sqrt(delta))));
 		return (1);
 	}
 }
