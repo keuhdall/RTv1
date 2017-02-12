@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 01:19:41 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/11 13:59:15 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/12 02:33:08 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,11 +126,10 @@ typedef struct			s_camera
 typedef struct			s_object
 {
 	int					type;
-	int					size;
+	double				size;
 	int					color;
 	t_color				color2;
 	double				shade;
-	double				radius;
 	t_dpoint_3d			position;
 	t_dpoint_3d			rotation;
 	t_dpoint_3d			intersec;

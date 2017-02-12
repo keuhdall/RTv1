@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 21:57:15 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/06 14:33:51 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/12 02:33:30 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	ft_fill_object_size(t_env *env, char **tab, t_object *obj, char *found)
 	if (!ft_strcmp(tab[0], "size"))
 	{
 		env->object_filled[8] = 1;
-		obj->size = ft_atoi(tab[1]);
+		obj->size = ft_atof(tab[1]);
 		*found = 1;
 	}
 }
