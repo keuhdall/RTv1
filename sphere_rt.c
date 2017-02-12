@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/28 12:46:18 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/11 14:45:51 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/12 02:31:26 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ double		ft_solve_eq(t_dpoint_3d eq, double delta)
 		t.z = -eq.y;
 	else
 	{
-		t.x = (-eq.y + delta) / (2 * eq.x);
-		t.y = (-eq.y - delta) / (2 * eq.x);
+		delta = (double)sqrt(delta);
+		t.x = (-eq.y + delta);// / (2 * eq.x);
+		t.y = (-eq.y - delta);// / (2 * eq.x);
 		if (t.x < 0 || t.y < 0)
 			return (0);
 		t.z = (t.x < t.y ? t.x : t.y);
@@ -33,19 +34,24 @@ int			ft_sphere_intersec(t_object *obj, t_ray ray)
 {
 	t_dpoint_3d	p;
 	double		delta;
-
+/*
 	p.x = ft_dotprod(ray.dir, ray.dir);
 	p.y = 2 * ft_dotprod(ray.dir, obj->position);
 	p.z = ft_dotprod(obj->position, obj->position) - obj->size * obj->size;
-	delta = pow(p.y, 2) - 4 * p.x * p.z;
+*/
+	t_dpoint_3d px = ft_vdiff_s(ray.orig, obj->position);
+	p.y = ft_dotprod(px, ray.dir);
+	p.z = ft_dotprod(px, px) - (obj->size * obj->size);
+	//delta = pow(p.y, 2) - 4 * p.x * p.z;
+	delta = pow(p.y, 2) - p.z;
 	if (delta < 0)
 		return (0);
 	else
 	{
 		obj->intersec = ft_vsum_s(ray.orig, ft_vprod(ray.dir,
-			ft_solve_eq(p, (double)sqrt(delta))));
+			ft_solve_eq(p, delta)));
 		obj->normal = ft_vquo(ft_vdiff_s(obj->intersec, obj->position),
-			obj->radius);
+			obj->size);
 		return (1);
 	}
 }

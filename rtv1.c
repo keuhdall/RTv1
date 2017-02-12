@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 01:48:29 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/11 14:48:45 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/12 02:50:09 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,16 @@ t_color	ft_calc_shade(t_object obj, t_spot spot)
 {
 	double		shade;
 
-	printf("intersec = %f; %f; %f\n", obj.intersec.x, obj.intersec.y, obj.intersec.z);
-	printf("normal = %f; %f; %f\n", obj.normal.x, obj.normal.y, obj.normal.z);
+	//printf("intersec = %f; %f; %f\n", obj.intersec.x, obj.intersec.y, obj.intersec.z);
+	//printf("normal = %f; %f; %f\n", obj.normal.x, obj.normal.y, obj.normal.z);
 	shade = ft_dotprod(
 			//ft_normalize(ft_vdiff_s(spot.position, obj.intersec)),
 			obj.normal,
 			ft_vnegative(ft_normalize(ft_vdiff_s(obj.intersec, spot.position))));
-	//printf("shade = %f\n", shade);
-	return (shade < 0 ? (t_color){0.0, 0.0, 0.0} : ft_mult_color(
-		ft_mult_color(obj.color2, 1.0), shade * 1.0));
+	if (shade <= 0)
+		return ((t_color){0.0, 0.0, 0.0});
+	else
+		return (ft_mult_color(ft_mult_color(obj.color2, 1.0), shade * 1.0));
 }
 
 int	ft_intersect_obj(t_obj_lst *obj_lst, t_ray ray)
@@ -112,6 +113,8 @@ t_color	ft_raytrace(t_env *env, t_ray ray)
 		//ft_normalize(ft_vdiff_s(tmp_spot->spot.position, closest->intersec));
 		final_color = ft_add_color(ft_calc_shade(*closest, tmp_spot->spot),
 			final_color);
+		if (final_color.r || final_color.g || final_color.b)
+			printf("final color = %f %f %f\n", final_color.r, final_color.g, final_color.b);
 		//return ((t_color){1.0, 1.0, 1.0});
 		tmp_spot = tmp_spot->next;
 	}
@@ -141,7 +144,7 @@ int	main(int argc, char *argv[])
 		printf("scene name : %s\n", env.scene.name);
 		printf("scene size.x : %d\n", env.scene.size.x);
 		printf("scene size.y : %d\n", env.scene.size.y);
-		printf("===============\n");
+		printf("===============\n\n");
 		printf("====CAMERA====\n");
 		printf("camera position.x : %f\n", env.camera.position.x);
 		printf("camera position.y : %f\n", env.camera.position.y);
@@ -150,8 +153,7 @@ int	main(int argc, char *argv[])
 		printf("camera rotation.x : %f\n", env.camera.rotation.x);
 		printf("camera rotation.y : %f\n", env.camera.rotation.y);
 		printf("camera rotation.z : %f\n", env.camera.position.z);
-		printf("==============\n");
-		printf("\n");
+		printf("==============\n\n");
 		tmp_obj = env.obj_lst;
 		tmp_spot = env.spot_lst;
 		if (!tmp_obj)
@@ -159,7 +161,7 @@ int	main(int argc, char *argv[])
 		while (tmp_obj)
 		{
 			printf("=====NEW OBJECT=====\n");
-			printf("object size : %d\n", tmp_obj->obj.size);
+			printf("object size : %f\n", tmp_obj->obj.size);
 			printf("object position.x : %f\n", tmp_obj->obj.position.x);
 			printf("object position.y : %f\n", tmp_obj->obj.position.y);
 			printf("object position.z : %f\n", tmp_obj->obj.position.z);
@@ -168,8 +170,7 @@ int	main(int argc, char *argv[])
 			printf("object rotation.y : %f\n", tmp_obj->obj.rotation.y);
 			printf("object rotation.z : %f\n", tmp_obj->obj.rotation.z);
 			printf("color = %d\n", tmp_obj->obj.color);
-			printf("====================\n");
-			printf("\n");
+			printf("====================\n\n");
 			tmp_obj = tmp_obj->next;
 		}
 		while (tmp_spot)
@@ -178,8 +179,7 @@ int	main(int argc, char *argv[])
 			printf("spot position.x : %f\n", tmp_spot->spot.position.x);
 			printf("spot position.y : %f\n", tmp_spot->spot.position.y);
 			printf("spot position.z : %f\n", tmp_spot->spot.position.z);
-			printf("================\n");
-			printf("\n");
+			printf("================\n\n");
 			tmp_spot = tmp_spot->next;
 		}
 	}
