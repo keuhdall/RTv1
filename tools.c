@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 18:13:47 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/11 14:23:04 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/13 15:53:45 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void		ft_puterr(int err)
 		ft_putendl("Fatal : internal failure. What have you done ?!");
 	else if (err == ERR_NO_OBJ)
 		ft_putendl("Error : no object found, it's either incomplete or empty");
+	else if (err == ERR_UNKNOWN_OBJ)
+		ft_putendl("Error : this type of object does not exist");
 	exit(1);
 }
 
