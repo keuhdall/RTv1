@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 17:53:47 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/13 17:06:24 by                  ###   ########.fr       */
+/*   Updated: 2017/02/14 14:10:00 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,9 @@ void		ft_fill_objects(t_env *env, char *ln)
 	if (!tmp[1])
 		ft_puterr(ERR_FILE_SYNTAX);
 	ft_fill_object_type(env, tmp, &obj, &found);
-	if (!found)
-		ft_fill_object_size(env, tmp, &obj, &found);
-	if (!found)
-		ft_fill_object_position(env, tmp, &obj, &found);
-	if (!found)
-		ft_fill_object_rotation(env, tmp, &obj, &found);
+	ft_fill_object_size(env, tmp, &obj, &found);
+	ft_fill_object_position(env, tmp, &obj, &found);
+	ft_fill_object_rotation(env, tmp, &obj, &found);
 	if (!ft_strcmp(tmp[0], "color"))
 		ft_fill_object_color(env, tmp, &obj);
 	else if (!found)
