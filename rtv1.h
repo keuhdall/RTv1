@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 01:19:41 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/12 02:47:25 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/13 17:05:42 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define MAX_INDEX_SCENE 2
 # define MAX_INDEX_CAMERA 6
 # define MAX_INDEX_OBJECT 9
-#define MAX_INDEX_SPOT 3
+# define MAX_INDEX_SPOT 4
 # define VEC_RIGHT (t_dpoint_3d) {1.0, 0.0, 0.0}
 # define VEC_UP (t_dpoint_3d) {0.0, 1.0, 0.0}
 # define VEC_DIR (t_dpoint_3d) {0.0, 0.0, 1.0}
@@ -48,6 +48,7 @@ enum	e_errors
 	ERR_FILE_OPEN,
 	ERR_FILE_SYNTAX,
 	ERR_NO_OBJ,
+	ERR_UNKNOWN_OBJ,
 	ERR_INTERNAL_FAILURE
 };
 
@@ -127,8 +128,7 @@ typedef struct			s_object
 {
 	int					type;
 	double				size;
-	int					color;
-	t_color				color2;
+	t_color				color;
 	double				shade;
 	t_dpoint_3d			position;
 	t_dpoint_3d			rotation;
@@ -145,6 +145,7 @@ typedef struct			s_obj_lst
 typedef struct			s_spot
 {
 	t_dpoint_3d			position;
+	double				intensity;
 }						t_spot;
 
 typedef struct			s_spot_lst
@@ -186,6 +187,7 @@ void					ft_fill_camera_direction(t_env *env, char **tab,
 							char *found);
 void					ft_fill_camera_rotation(t_env *env, char **tab);
 void					ft_fill_objects(t_env *env, char *ln);
+void					ft_fill_object_color(t_env *env, char **tab, t_object *obj);
 void					ft_fill_object_type(t_env *env, char **tab,
 							t_object *obj, char *found);
 void					ft_fill_object_size(t_env *env, char **tab,
@@ -196,6 +198,8 @@ void					ft_fill_object_rotation(t_env *env, char **tab,
 							t_object *obj, char *found);
 void					ft_fill_spots(t_env *env, char *ln);
 void					ft_fill_spot_position(t_env *env, char **tab,
+							t_spot *spot, char *found);
+void					ft_fill_spot_intensity(t_env *env, char **tab,
 							t_spot *spot, char *found);
 t_dpoint_3d				ft_vsum(t_dpoint_3d a, double b);
 t_dpoint_3d				ft_vdiff(t_dpoint_3d a, double b);

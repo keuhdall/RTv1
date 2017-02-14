@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 17:53:47 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/11 02:58:27 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/13 17:06:24 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,7 @@ void		ft_fill_objects(t_env *env, char *ln)
 	if (!found)
 		ft_fill_object_rotation(env, tmp, &obj, &found);
 	if (!ft_strcmp(tmp[0], "color"))
-	{
-		env->object_filled[0] = 1;
-		obj.color = ft_atoi(tmp[1]);
-	}
+		ft_fill_object_color(env, tmp, &obj);
 	else if (!found)
 		ft_puterr(ERR_FILE_SYNTAX);
 	if (ft_check_entity(env, OBJECTS))
@@ -74,6 +71,8 @@ void		ft_fill_spots(t_env *env, char *ln)
 	if (!tmp[1])
 		ft_puterr(ERR_FILE_SYNTAX);
 	ft_fill_spot_position(env, tmp, &spot, &found);
+	if (!found)
+		ft_fill_spot_intensity(env, tmp, &spot, &found);
 	if (!found)
 		ft_puterr(ERR_FILE_SYNTAX);
 	if (ft_check_entity(env, SPOTS))
