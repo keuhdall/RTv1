@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 01:48:29 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/12 02:50:09 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/13 17:08:44 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,15 @@
 
 int		ft_color_int(t_color c)
 {
-	return ((c.r * 255) + (c.g * 255) + (c.b * 255));
+	int	x;
+	int	y;
+	int	z;
+
+	x = (c.r * pow(255, 3) > pow(255, 3) ? pow(255, 3) : c.r * pow(255, 3));
+	y = (c.g * pow(255, 2) > pow(255, 2) ? pow(255, 2) : c.g * pow(255, 2));
+	z = (c.b * pow(255, 1) > pow(255, 1) ? pow(255, 1) : c.b * pow(255, 1));
+	//return ((c.r * 255 * 255 * 255) + (c.g * 255 * 255) + (c.b * 255));
+	return (x + y + z);
 }
 
 void	ft_ppixel(t_env *env, int x, int y, t_color c)
@@ -51,7 +59,8 @@ t_color	ft_calc_shade(t_object obj, t_spot spot)
 	if (shade <= 0)
 		return ((t_color){0.0, 0.0, 0.0});
 	else
-		return (ft_mult_color(ft_mult_color(obj.color2, 1.0), shade * 1.0));
+		return (ft_mult_color(ft_mult_color(obj.color, 1.0), shade *
+			spot.intensity));
 }
 
 int	ft_intersect_obj(t_obj_lst *obj_lst, t_ray ray)
@@ -113,8 +122,6 @@ t_color	ft_raytrace(t_env *env, t_ray ray)
 		//ft_normalize(ft_vdiff_s(tmp_spot->spot.position, closest->intersec));
 		final_color = ft_add_color(ft_calc_shade(*closest, tmp_spot->spot),
 			final_color);
-		if (final_color.r || final_color.g || final_color.b)
-			printf("final color = %f %f %f\n", final_color.r, final_color.g, final_color.b);
 		//return ((t_color){1.0, 1.0, 1.0});
 		tmp_spot = tmp_spot->next;
 	}
@@ -169,7 +176,8 @@ int	main(int argc, char *argv[])
 			printf("object rotation.x : %f\n", tmp_obj->obj.rotation.x);
 			printf("object rotation.y : %f\n", tmp_obj->obj.rotation.y);
 			printf("object rotation.z : %f\n", tmp_obj->obj.rotation.z);
-			printf("color = %d\n", tmp_obj->obj.color);
+			printf("color = %f %f %f\n", tmp_obj->obj.color.r,
+				tmp_obj->obj.color.g, tmp_obj->obj.color.b);
 			printf("====================\n\n");
 			tmp_obj = tmp_obj->next;
 		}
@@ -195,8 +203,6 @@ int	main(int argc, char *argv[])
 			ray.dir = ft_calc_vdir(&env, (double)x, (double)y);
 			ray.dir = ft_normalize(ray.dir);
 			int color = ft_color_int(ft_raytrace(&env, ray));
-			if (color)
-				printf("color = %d\n", color);
 			env.mlx.img.data[y * env.scene.size.x + x] = color;
 			//ft_ppixel(&env, x, y, ft_raytrace(&env, ray));
 		}
