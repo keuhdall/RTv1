@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 01:54:38 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/06 20:14:30 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/14 16:16:38 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	ft_read_file(char *name, t_env *env)
 	{
 		if (ret == -1)
 			ft_puterr(ERR_FILE_OPEN);
-		if (ft_strcmp(ln, ""))
+		if (ft_strcmp(ln, "") && ln[0] != '#')
 			ft_parse_line(env, ln);
 		free(ln);
 	}
