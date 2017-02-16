@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 14:13:51 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/16 10:38:08 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/16 10:46:37 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,5 @@ int			ft_plane_intersec(t_object *obj, t_ray ray)
 	obj->intersec = ft_vsum_s(ray.orig, ft_vprod(ray.dir, t));
 	obj->normal = v < 0 ? ft_v_unit(obj->rotation) : ft_vnegative(ft_v_unit(
 		obj->rotation));
-	//printf("intersec = %f %f %f\n", obj->intersec.x, obj->intersec.y, obj->intersec.z);
-	printf("normal = %f %f %f\n", obj->normal.x, obj->normal.y, obj->normal.z);
 	return (1);
 }
