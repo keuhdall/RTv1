@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 01:19:41 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/13 17:05:42 by                  ###   ########.fr       */
+/*   Updated: 2017/02/16 10:32:52 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define RTV1_H
 
 # include <math.h>
+# include <stdio.h> //STDIO
 # include "./minilibx/mlx.h"
 # include "./libft/libft.h"
 # include "./libft/get_next_line.h"
@@ -169,7 +170,7 @@ typedef struct			s_env
 }						t_env;
 
 int						ft_sphere_intersec(t_object *obj, t_ray ray);
-int						ft_plane_intersec(t_ray ray, t_object obj);
+int						ft_plane_intersec(t_object *obj, t_ray ray);
 int						ft_check_all(t_env *env);
 int						ft_check_entity(t_env *env, int entity_type);
 void					ft_puterr(int err);

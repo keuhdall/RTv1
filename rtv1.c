@@ -6,34 +6,23 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 01:48:29 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/13 17:08:44 by                  ###   ########.fr       */
+/*   Updated: 2017/02/16 10:33:40 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-#include <stdio.h>
 
 int		ft_color_int(t_color c)
 {
-	int	x;
-	int	y;
-	int	z;
+	t_point_3d	color;
 
-	x = (c.r * pow(255, 3) > pow(255, 3) ? pow(255, 3) : c.r * pow(255, 3));
-	y = (c.g * pow(255, 2) > pow(255, 2) ? pow(255, 2) : c.g * pow(255, 2));
-	z = (c.b * pow(255, 1) > pow(255, 1) ? pow(255, 1) : c.b * pow(255, 1));
-	//return ((c.r * 255 * 255 * 255) + (c.g * 255 * 255) + (c.b * 255));
-	return (x + y + z);
-}
-
-void	ft_ppixel(t_env *env, int x, int y, t_color c)
-{
-	int	i;
-
-	i = x * 4 + y * env->scene.size.x;
-	env->mlx.img.data[i] = (int)(c.b * 255);
-	env->mlx.img.data[++i] = (int)(c.g * 255);
-	env->mlx.img.data[++i] = (int)(c.r * 255);
+	c.r = c.r > 1 ? 1 : c.r;
+	c.g = c.g > 1 ? 1 : c.g;
+	c.b = c.b > 1 ? 1 : c.b;
+	color.x = (((int)(c.r * 255) & 0xff) << 16);
+	color.y = (((int)(c.g * 255) & 0xff) << 8);
+	color.z = (((int)(c.b * 255) & 0xff));
+	return (color.x + color.y + color.z);
 }
 
 t_color	ft_add_color(t_color a, t_color b)
@@ -50,12 +39,11 @@ t_color	ft_calc_shade(t_object obj, t_spot spot)
 {
 	double		shade;
 
-	//printf("intersec = %f; %f; %f\n", obj.intersec.x, obj.intersec.y, obj.intersec.z);
-	//printf("normal = %f; %f; %f\n", obj.normal.x, obj.normal.y, obj.normal.z);
-	shade = ft_dotprod(
-			//ft_normalize(ft_vdiff_s(spot.position, obj.intersec)),
-			obj.normal,
-			ft_vnegative(ft_normalize(ft_vdiff_s(obj.intersec, spot.position))));
+	shade = ft_dotprod(obj.normal, ft_vnegative(
+		ft_normalize(ft_vdiff_s(obj.intersec, spot.position))));
+	//printf("shade = %f\n", shade);
+	if (shade > 1)
+		shade = 1;
 	if (shade <= 0)
 		return ((t_color){0.0, 0.0, 0.0});
 	else
@@ -72,7 +60,7 @@ int	ft_intersect_obj(t_obj_lst *obj_lst, t_ray ray)
 	}
 	else if (obj_lst->obj.type == PLANE)
 	{
-		if (ft_plane_intersec(ray, obj_lst->obj))
+		if (ft_plane_intersec(&obj_lst->obj, ray))
 			return (1);
 	}
 	return (0);
@@ -93,8 +81,6 @@ t_object	*ft_get_closest_obj(t_env *env, t_ray ray)
 		{
 			dists.y = ft_dotprod(ft_vdiff_s(tmp_obj->obj.intersec, ray.orig),
 								ft_vdiff_s(tmp_obj->obj.intersec, ray.orig));
-			//dists.x = dists.y < dists.x ? dists.y : dists.x;
-			//closest_obj = dists.y < dists.x ? &tmp_obj->obj : closest_obj;
 			if (dists.y < dists.x)
 			{
 				dists.x = dists.y;
@@ -122,7 +108,6 @@ t_color	ft_raytrace(t_env *env, t_ray ray)
 		//ft_normalize(ft_vdiff_s(tmp_spot->spot.position, closest->intersec));
 		final_color = ft_add_color(ft_calc_shade(*closest, tmp_spot->spot),
 			final_color);
-		//return ((t_color){1.0, 1.0, 1.0});
 		tmp_spot = tmp_spot->next;
 	}
 	return (final_color);
@@ -204,7 +189,6 @@ int	main(int argc, char *argv[])
 			ray.dir = ft_normalize(ray.dir);
 			int color = ft_color_int(ft_raytrace(&env, ray));
 			env.mlx.img.data[y * env.scene.size.x + x] = color;
-			//ft_ppixel(&env, x, y, ft_raytrace(&env, ray));
 		}
 	mlx_put_image_to_window(env.mlx.ptr, env.mlx.win, env.mlx.img.ptr, 0, 0);
 	mlx_loop(env.mlx.ptr);
