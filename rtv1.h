@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 01:19:41 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/16 10:32:52 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/16 18:34:34 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ typedef struct			s_env
 
 int						ft_sphere_intersec(t_object *obj, t_ray ray);
 int						ft_plane_intersec(t_object *obj, t_ray ray);
+int						ft_cylinder_intersec(t_object *obj, t_ray ray);
 int						ft_check_all(t_env *env);
 int						ft_check_entity(t_env *env, int entity_type);
 void					ft_puterr(int err);
@@ -188,7 +189,8 @@ void					ft_fill_camera_direction(t_env *env, char **tab,
 							char *found);
 void					ft_fill_camera_rotation(t_env *env, char **tab);
 void					ft_fill_objects(t_env *env, char *ln);
-void					ft_fill_object_color(t_env *env, char **tab, t_object *obj);
+void					ft_fill_object_color(t_env *env, char **tab,
+							t_object *obj);
 void					ft_fill_object_type(t_env *env, char **tab,
 							t_object *obj, char *found);
 void					ft_fill_object_size(t_env *env, char **tab,

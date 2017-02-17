@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 01:48:29 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/16 10:33:40 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/16 18:13:18 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ t_color	ft_calc_shade(t_object obj, t_spot spot)
 
 	shade = ft_dotprod(obj.normal, ft_vnegative(
 		ft_normalize(ft_vdiff_s(obj.intersec, spot.position))));
-	//printf("shade = %f\n", shade);
 	if (shade > 1)
 		shade = 1;
 	if (shade <= 0)
@@ -61,6 +60,11 @@ int	ft_intersect_obj(t_obj_lst *obj_lst, t_ray ray)
 	else if (obj_lst->obj.type == PLANE)
 	{
 		if (ft_plane_intersec(&obj_lst->obj, ray))
+			return (1);
+	}
+	else if (obj_lst->obj.type == CYLINDER)
+	{
+		if (ft_cylinder_intersec(&obj_lst->obj, ray))
 			return (1);
 	}
 	return (0);
