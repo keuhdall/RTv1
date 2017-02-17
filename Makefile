@@ -20,6 +20,7 @@ SRC = rtv1.c \
 		camera.c \
 		object.c \
 		lists.c \
+		rt_cone.c \
 		rt_cylinder.c \
 		rt_plane.c \
 		rt_sphere.c \

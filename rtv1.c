@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 01:48:29 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/16 18:13:18 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/17 11:02:37 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,11 @@ int	ft_intersect_obj(t_obj_lst *obj_lst, t_ray ray)
 	else if (obj_lst->obj.type == CYLINDER)
 	{
 		if (ft_cylinder_intersec(&obj_lst->obj, ray))
+			return (1);
+	}
+	else if (obj_lst->obj.type == CONE)
+	{
+		if (ft_cone_intersec(&obj_lst->obj, ray))
 			return (1);
 	}
 	return (0);

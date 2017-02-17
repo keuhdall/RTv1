@@ -6,13 +6,13 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 13:26:18 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/16 22:48:37 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/17 11:06:00 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-double	ft_solve_eq2(t_dpoint_3d eq, double delta)
+double	ft_solve_eq(t_dpoint_3d eq, double delta)
 {
 	t_dpoint_3d	t;
 
@@ -47,11 +47,11 @@ int		ft_cylinder_intersec(t_object *obj, t_ray ray)
 	if (delta < 0)
 		return (0);
 	obj->intersec = ft_vsum_s(ray.orig, ft_vprod(ray.dir,
-		ft_solve_eq2(eq, delta)));
+		ft_solve_eq(eq, delta)));
 	obj->normal = ft_normalize(ft_vdiff_s(ft_vdiff_s(ft_vsum_s(ray.orig,
-		ft_vprod(ray.dir, ft_solve_eq2(eq, delta))), obj->position), ft_vprod(
+		ft_vprod(ray.dir, ft_solve_eq(eq, delta))), obj->position), ft_vprod(
 		ft_normalize(obj->rotation), ft_dotprod(ray.dir, ft_vprod(v,
-		ft_solve_eq2(eq, delta))) + ft_dotprod(x, ft_normalize(
+		ft_solve_eq(eq, delta))) + ft_dotprod(x, ft_normalize(
 		obj->rotation)))));
 	return (1);
 }

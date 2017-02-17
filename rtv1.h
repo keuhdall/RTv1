@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 01:19:41 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/16 18:34:34 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/17 11:01:45 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,7 @@ typedef struct			s_env
 int						ft_sphere_intersec(t_object *obj, t_ray ray);
 int						ft_plane_intersec(t_object *obj, t_ray ray);
 int						ft_cylinder_intersec(t_object *obj, t_ray ray);
+int						ft_cone_intersec(t_object *obj, t_ray ray);
 int						ft_check_all(t_env *env);
 int						ft_check_entity(t_env *env, int entity_type);
 void					ft_puterr(int err);
@@ -216,6 +217,7 @@ t_dpoint_3d				ft_calc_vdir(t_env *env, double x, double y);
 t_dpoint_3d				ft_normalize(t_dpoint_3d v);
 t_dpoint_3d				ft_vnegative(t_dpoint_3d v);
 double					ft_dotprod(t_dpoint_3d a, t_dpoint_3d b);
+double					ft_solve_eq(t_dpoint_3d eq, double delta);
 t_obj_lst				*ft_new_obj(t_object obj);
 void					ft_push_obj(t_obj_lst **obj_lst, t_obj_lst *new);
 t_spot_lst				*ft_new_spot(t_spot spot);
