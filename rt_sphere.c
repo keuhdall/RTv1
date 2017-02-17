@@ -6,13 +6,13 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/28 12:46:18 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/16 15:14:46 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/17 10:03:42 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-double		ft_solve_eq(t_dpoint_3d eq, double delta)
+static double		ft_solve_sphere(t_dpoint_3d eq, double delta)
 {
 	t_dpoint_3d	t;
 
@@ -30,7 +30,7 @@ double		ft_solve_eq(t_dpoint_3d eq, double delta)
 	return (t.z);
 }
 
-int			ft_sphere_intersec(t_object *obj, t_ray ray)
+int					ft_sphere_intersec(t_object *obj, t_ray ray)
 {
 	t_dpoint_3d	p;
 	t_dpoint_3d	px;
@@ -45,7 +45,7 @@ int			ft_sphere_intersec(t_object *obj, t_ray ray)
 	else
 	{
 		obj->intersec = ft_vsum_s(ray.orig, ft_vprod(ray.dir,
-			ft_solve_eq(p, delta)));
+			ft_solve_sphere(p, delta)));
 		obj->normal = ft_vquo(ft_vdiff_s(obj->intersec, obj->position),
 			obj->size);
 		return (1);
