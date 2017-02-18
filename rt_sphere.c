@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/28 12:46:18 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/17 19:18:31 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/17 19:53:19 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,12 @@ static double		ft_solve_sphere(t_dpoint_3d eq, double delta, char *boolean)
 		t.y = (-eq.y - delta);
 		if (t.x < 0 || t.y < 0)
 		{
-			if (t.x > 0)
-				return (t.x);
-			else if (t.y > 0)
-				return (t.y);
-			else
+			if (t.x < 0 && t.y < 0)
 			{
 				*boolean = 1;
 				return (0);
 			}
+			return (t.x > t.y ? t.x : t.y);
 		}
 		t.z = (t.x < t.y ? t.x : t.y);
 	}
