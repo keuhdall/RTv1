@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 01:19:41 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/17 21:37:55 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/17 21:41:39 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define RTV1_H
 
 # include <math.h>
-# include <stdio.h> //STDIO
 # include "./minilibx/mlx.h"
 # include "./libft/libft.h"
 # include "./libft/get_next_line.h"
