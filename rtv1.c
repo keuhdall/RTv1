@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 01:48:29 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/17 11:02:37 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/17 16:20:50 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,35 @@ t_object	*ft_get_closest_obj(t_env *env, t_ray ray)
 	return (closest_obj);
 }
 
+int		ft_intersect_light(t_env *env, t_object *closest, t_spot spot)
+{
+	t_obj_lst	*tmp;
+	t_dpoint_3d	v;
+	t_ray		ray;
+	double		dist;
+
+	tmp = env->obj_lst;
+	v = ft_vdiff_s(closest->intersec, spot.position);
+	ray.orig = spot.position;
+	ray.dir = ft_normalize(v);
+	dist = sqrt(ft_dotprod(v, v));
+	while (tmp)
+	{
+		if (&tmp->obj != closest)
+		{
+			if (ft_intersect_obj(tmp, ray))
+			{
+				if (sqrt(ft_dotprod(ft_vdiff_s(tmp->obj.intersec,
+					spot.position), ft_vdiff_s(tmp->obj.intersec,
+					spot.position))) < dist)
+					return (1);
+			}
+		}
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
 t_color	ft_raytrace(t_env *env, t_ray ray)
 {
 	t_color		final_color;
@@ -114,9 +143,9 @@ t_color	ft_raytrace(t_env *env, t_ray ray)
 		return ((t_color){0.0, 0.0, 0.0});
 	while (tmp_spot)
 	{
-		//ft_normalize(ft_vdiff_s(tmp_spot->spot.position, closest->intersec));
-		final_color = ft_add_color(ft_calc_shade(*closest, tmp_spot->spot),
-			final_color);
+		if (!ft_intersect_light(env, closest, tmp_spot->spot))
+			final_color = ft_add_color(ft_calc_shade(*closest, tmp_spot->spot),
+				final_color);
 		tmp_spot = tmp_spot->next;
 	}
 	return (final_color);
