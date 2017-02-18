@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 01:19:41 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/17 20:44:55 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/17 21:37:55 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,8 @@ typedef struct			s_env
 	char				spot_filled[MAX_INDEX_SPOT];
 }						t_env;
 
+int						ft_exit(void);
+int						ft_exit_key(int keycode);
 int						ft_intersect_obj(t_obj_lst *obj_lst, t_ray ray);
 int						ft_intersect_light(t_env *env, t_object *closest,
 							t_spot spot);

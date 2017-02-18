@@ -18,14 +18,15 @@ SRC = rtv1.c \
 		checker.c \
 		scene.c \
 		camera.c \
-		color.c \
 		object.c \
+		spot.c \
 		lists.c \
+		events.c \
+		color.c \
 		rt_cone.c \
 		rt_cylinder.c \
 		rt_plane.c \
 		rt_sphere.c \
-		spot.c \
 		tools.c \
 		tools2.c \
 		tools3.c

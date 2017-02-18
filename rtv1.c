@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 01:48:29 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/17 21:01:57 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/17 21:40:34 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,8 @@ int			main(int argc, char *argv[])
 	else
 		ft_puterr(ERR_FILE_SYNTAX);
 	ft_draw(&env);
+	mlx_key_hook(env.mlx.win, &ft_exit_key, 0);
+	mlx_hook(env.mlx.win, 17, (1L << 17), &ft_exit, 0);
 	mlx_put_image_to_window(env.mlx.ptr, env.mlx.win, env.mlx.img.ptr, 0, 0);
 	mlx_loop(env.mlx.ptr);
 	return (0);
