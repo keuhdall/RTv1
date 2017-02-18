@@ -18,6 +18,7 @@ SRC = rtv1.c \
 		checker.c \
 		scene.c \
 		camera.c \
+		color.c \
 		object.c \
 		lists.c \
 		rt_cone.c \

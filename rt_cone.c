@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 09:52:29 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/17 19:49:28 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/17 20:46:45 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_cone_intersec(t_object *obj, t_ray ray)
 	t_dpoint_3d	x;
 	t_dpoint_3d	eq;
 	t_dpoint_3d	p;
-	char	boolean;
+	char		boolean;
 
 	boolean = 0;
 	v = ft_normalize(obj->rotation);

@@ -6,7 +6,7 @@
 /*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 13:26:18 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/17 19:49:47 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/17 20:49:18 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ int		ft_cylinder_intersec(t_object *obj, t_ray ray)
 	t_dpoint_3d	x;
 	t_dpoint_3d	eq;
 	char		boolean;
-	double		delta;
-	double		t;
+	t_dpoint	p;
 
 	boolean = 0;
 	v = ft_normalize(obj->rotation);
@@ -53,14 +52,14 @@ int		ft_cylinder_intersec(t_object *obj, t_ray ray)
 	eq.y = 2 * (ft_dotprod(ray.dir, x) - ft_dotprod(ray.dir, v) *
 		ft_dotprod(x, v));
 	eq.z = ft_dotprod(x, x) - pow(ft_dotprod(x, v), 2) - obj->size * obj->size;
-	delta = pow(eq.y, 2) - 4 * eq.x * eq.z;
-	t = ft_solve_eq(eq, delta, &boolean);
-	if (boolean || delta < 0)
+	p.x = pow(eq.y, 2) - 4 * eq.x * eq.z;
+	p.y = ft_solve_eq(eq, p.x, &boolean);
+	if (boolean || p.x < 0)
 		return (0);
-	obj->intersec = ft_vsum_s(ray.orig, ft_vprod(ray.dir, t));
+	obj->intersec = ft_vsum_s(ray.orig, ft_vprod(ray.dir, p.y));
 	obj->normal = ft_normalize(ft_vdiff_s(ft_vdiff_s(ft_vsum_s(ray.orig,
-		ft_vprod(ray.dir, t)), obj->position), ft_vprod(ft_normalize(
-		obj->rotation), ft_dotprod(ray.dir, ft_vprod(v,t)) + ft_dotprod(
+		ft_vprod(ray.dir, p.y)), obj->position), ft_vprod(ft_normalize(
+		obj->rotation), ft_dotprod(ray.dir, ft_vprod(v, p.y)) + ft_dotprod(
 		x, ft_normalize(obj->rotation)))));
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 01:19:41 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/17 19:36:25 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/17 20:44:55 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,9 @@ typedef struct			s_env
 	char				spot_filled[MAX_INDEX_SPOT];
 }						t_env;
 
+int						ft_intersect_obj(t_obj_lst *obj_lst, t_ray ray);
+int						ft_intersect_light(t_env *env, t_object *closest,
+							t_spot spot);
 int						ft_sphere_intersec(t_object *obj, t_ray ray);
 int						ft_plane_intersec(t_object *obj, t_ray ray);
 int						ft_cylinder_intersec(t_object *obj, t_ray ray);
@@ -205,6 +208,9 @@ void					ft_fill_spot_position(t_env *env, char **tab,
 							t_spot *spot, char *found);
 void					ft_fill_spot_intensity(t_env *env, char **tab,
 							t_spot *spot, char *found);
+t_color					ft_add_color(t_color a, t_color b);
+t_color					ft_calc_shade(t_object obj, t_spot spot);
+int						ft_color_int(t_color c);
 t_dpoint_3d				ft_vsum(t_dpoint_3d a, double b);
 t_dpoint_3d				ft_vdiff(t_dpoint_3d a, double b);
 t_dpoint_3d				ft_vprod(t_dpoint_3d a, double b);
