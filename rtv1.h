@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 01:19:41 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/17 21:41:39 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/18 18:34:26 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ enum	e_errors
 	ERR_FILE_SYNTAX,
 	ERR_NO_OBJ,
 	ERR_UNKNOWN_OBJ,
-	ERR_INTERNAL_FAILURE
+	ERR_WRONG_ARGS
 };
 
 typedef struct			s_color

@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 01:48:29 by lmarques          #+#    #+#             */
-/*   Updated: 2017/02/17 21:40:34 by lmarques         ###   ########.fr       */
+/*   Updated: 2017/02/18 18:34:38 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int			main(int argc, char *argv[])
 	ft_init_struct(&env);
 	if (argc != 2)
 	{
-		ft_putendl("error");
+		ft_puterr(ERR_WRONG_ARGS);
 		return (-1);
 	}
 	if (ft_check_all(&env))
